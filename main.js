@@ -5,7 +5,15 @@ const path = require('path')
 const window = require('electron-window')
 
 app.on('ready', () => {
-  const mainWindow = window.createWindow({ width: 600, height: 500, webPreferences: { webSecurity: true, nodeIntegration: true } })
+  const mainWindow = window.createWindow({
+    backgroundColor: "#141414",
+    width: 600,
+    height: 500,
+    webPreferences: {
+      webSecurity: true,
+      nodeIntegration: true
+    }
+  });
   const someArgs = { data: 'hi' }
   const indexPath = path.resolve(__dirname, 'index.html')
 

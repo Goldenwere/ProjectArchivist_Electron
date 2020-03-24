@@ -355,3 +355,10 @@ template {
 *:focus {
   outline: none;
 }
+
+/**
+ * Disable text selection by default
+ */
+* {
+  -webkit-user-select: none;
+}

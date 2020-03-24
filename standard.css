@@ -1,0 +1,52 @@
+html {
+  font: caption;
+}
+
+.flex-section {
+  width: 100%;
+  display: flex;
+}
+
+.flex-section:nth-of-type(1) {
+  margin-top: 2em;
+}
+
+groupbox {
+  flex: 1 1 20%;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0 1em ;
+}
+
+groupbox h1 {
+  transform: translateY(-1.5em);
+  position: absolute;
+  display: inline-block;
+  margin: 1em 0.25em;
+  padding: 0 0.5em;
+}
+
+groupbox .controls {
+  margin: 2em 0;
+}
+
+control {
+  display: block;
+}
+
+listbox, listelem {
+  display: block;
+}
+
+listbox, input[type=button], input[type=text], input[type=number], select {
+  padding: 0.33em;
+}
+
+listbox, input[type=text], input[type=number] {
+  border-style: solid !important;
+  border-width: 1px;
+}
+
+select, input[type=button] {
+  border-style: none;
+}
