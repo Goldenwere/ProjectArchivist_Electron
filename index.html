@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+  </head>
+  <body>
+    <section id="Section_Program">
+      <groupbox id="Group_FileSettings">
+        <h1>.bat File Settings</h1>
+        <control id="Control_FileSettings_SavePath">
+          <label for="Field_FileSettings_SavePath" id="Label_FileSettings_SavePath">Save file as</label>
+          <input type="text" id="Field_FileSettings_SavePath" name="Field_FileSettings_SavePath"/>
+          <input type="button" value="Browse..." id="Button_FileSettings_SavePath"/>
+        </control>
+      </groupbox>
+    </section>
+    <section id="Section_Archiving">
+      <groupbox id="Group_ListItems">
+        <h1>List of Archived Items</h1>
+        <control id="Control_ListItems_ArchivedItems">
+          <listbox id="List_ListItems_ArchivedItems">
+            <listelem>Test 1</listelem>
+            <listelem>Test 2</listelem>
+          </listbox>
+        </control>
+        <section id="Section_ListItems_Buttons">
+          <control id="Control_ListItems_Add"><input type="button" value="Add" id="Button_ListItems_Add"/></control>
+          <control id="Control_ListItems_Remove"><input type="button" value="Remove" id="Button_ListItems_Remove"/></control>
+          <control id="Control_ListItems_Edit"><input type="button" value="Edit" id="Button_ListItems_Edit"/></control>
+        </section>
+      </groupbox>
+      <groupbox id="Group_GlobalControls">
+        <h1>Global Controls</h1>
+        <control id="Control_GlobalControls_Password">
+          <label for="Field_GlobalControls_Password" id="Label_GlobalControls_Password">Password</label>
+          <input type="text" id="Field_GlobalControls_Password" name="Field_GlobalControls_Password"/>
+        </control>
+        <control id="Control_GlobalControls_FileType">
+          <label for="Dropdown_GlobalControls_FileType" id="Label_GlobalControls_FileType">File Type</label>
+          <select id="Dropdown_GlobalControls_FileType">
+            <option value="7z">7-Zip</option>
+            <option value="Zip">Zip</option>
+          </select>
+        </control>
+        <control id="Control_GlobalControls_CompressionLevel">
+          <label for="Numeric_GlobalControls_CompressionLevel" id="Label_GlobalControls_CompressionLevel">Compression Level</label>
+          <input type="number" id="Numeric_GlobalControls_CompressionLevel" name="Numeric_GlobalControls_CompressionLevel" min="0" max="9"/>
+        </control>
+        <control id="Control_GlobalControls_Destination">
+          <label for="Field_GlobalControls_Destination" id="Label_GlobalControls_Destination">Destination</label>
+          <input type="text" id="Field_GlobalControls_Destination" name="Field_GlobalControls_Destination"/>
+          <input type="button" value="Browse..." id="Button_GlobalControls_Destination"/>
+        </control>
+        <control id="Control_GlobalControls_ApplyGlobals">
+          <input type="button" value="Apply Globals" id="Button_GlobalControls_ApplyGlobals"/>
+        </control>
+      </groupbox>
+      <control id="Control_Archiving_CreateScript"><input type="button" value="Create Script" id="Button_Archiving_CreateScript"/></control>
+    </section>
+  </body>
+</html>
