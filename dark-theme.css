@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(20, 20, 20);
+  color: rgb(220, 220, 220);
+  font-size: 1rem;
+}
+
+groupbox h1 {
+  background-color: rgb(20, 20, 20);
+  font-size: 1.25em;
+}
+
+listbox, input[type=text], input[type=number], select, input[type=button] {
+  background-color: rgb(50, 50, 50);
+  color: rgb(220, 220, 220);
+}
+
+.selected, input[type=text]:focus {
+  background-color: rgb(100, 100, 100);
+}

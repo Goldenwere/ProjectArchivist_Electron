@@ -5,7 +5,9 @@
     <title>Hello World!</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="normalize.css"/>
     <link rel="stylesheet" type="text/css" href="index.css"/>
+    <link rel="stylesheet" type="text/css" href="dark-theme.css"/>
   </head>
   <body>
     <section id="Section_Program">
@@ -23,7 +25,7 @@
         <h1>List of Archived Items</h1>
         <control id="Control_ListItems_ArchivedItems">
           <listbox id="List_ListItems_ArchivedItems">
-            <listelem>Test 1</listelem>
+            <listelem class="selected">Test 1</listelem>
             <listelem>Test 2</listelem>
           </listbox>
         </control>
@@ -59,6 +61,8 @@
           <input type="button" value="Apply Globals" id="Button_GlobalControls_ApplyGlobals"/>
         </control>
       </groupbox>
+    </section>
+    <section id="Section_Functions">
       <control id="Control_Archiving_CreateScript"><input type="button" value="Create Script" id="Button_Archiving_CreateScript"/></control>
     </section>
   </body>
