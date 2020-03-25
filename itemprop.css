@@ -1,0 +1,28 @@
+#Group_ItemSettings {
+  flex: 1 1 40%;
+}
+
+#Group_ItemSettings control {
+  width: 100%;
+}
+
+#Group_ItemSettings control label {
+  display: inline-block;
+  width: 35%;
+}
+
+#Group_ItemSettings control input {
+  width: 40%;
+}
+
+#Group_ItemSettings control select {
+  width: 42.5%;
+}
+
+#Group_Exclusions {
+  flex: 1 1 20%;
+}
+
+#Section_AddItem_ExitButtons {
+  flex: 1 0 10%;
+}
