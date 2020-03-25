@@ -7,8 +7,8 @@ const window = require('electron-window')
 app.on('ready', () => {
   const mainWindow = window.createWindow({
     backgroundColor: "#141414",
-    width: 600,
-    height: 500,
+    width: 620,
+    height: 580,
     webPreferences: {
       webSecurity: true,
       nodeIntegration: true

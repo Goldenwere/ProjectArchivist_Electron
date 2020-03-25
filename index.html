@@ -41,6 +41,17 @@
               <listelem>Test 10</listelem>
               <listelem>Test 11</listelem>
               <listelem>Test 12</listelem>
+              <listelem>Test 2</listelem>
+              <listelem>Test 3</listelem>
+              <listelem>Test 4</listelem>
+              <listelem>Test 5</listelem>
+              <listelem>Test 6</listelem>
+              <listelem>Test 7</listelem>
+              <listelem>Test 8</listelem>
+              <listelem>Test 9</listelem>
+              <listelem>Test 10</listelem>
+              <listelem>Test 11</listelem>
+              <listelem>Test 12</listelem>
             </listbox>
           </control>
           <section id="Section_ListItems_Buttons">
@@ -65,8 +76,28 @@
             </select>
           </control>
           <control id="Control_GlobalControls_CompressionLevel">
-            <label for="Numeric_GlobalControls_CompressionLevel" id="Label_GlobalControls_CompressionLevel">Compression Level</label>
-            <input type="number" id="Numeric_GlobalControls_CompressionLevel" name="Numeric_GlobalControls_CompressionLevel" min="0" max="9"/>
+            <label for="Dropdown_GlobalControls_CompressionLevel" id="Label_GlobalControls_CompressionLevel">Compression Level</label>
+            <select id="Dropdown_GlobalControls_CompressionLevel">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </control>
+          <control id="Control_GlobalControls_CompressionMethod">
+            <label for="Dropdown_GlobalControls_CompressionMethod" id="Label_GlobalControls_CompressionMethod">Compression Method</label>
+            <select id="Dropdown_GlobalControls_CompressionMethod">
+              <option value="LZMA">LZMA</option>
+              <option value="LZMA2">LZMA2</option>
+              <option value="PPMd">PPMd</option>
+              <option value="BZip2">BZip2</option>
+            </select>
           </control>
           <control id="Control_GlobalControls_Destination">
             <label for="Field_GlobalControls_Destination" id="Label_GlobalControls_Destination">Destination</label>
@@ -77,6 +108,7 @@
             <input type="button" value="Apply Globals" id="Button_GlobalControls_ApplyGlobals"/>
           </control>
         </section>
+        <p>⚠Warning: Applying these changes will overwrite the values stored in the items currently in the List of Archived Ites. You must edit an existing item afterward in order to make exceptions.</p>
       </groupbox>
     </section>
     <section id="Section_Functions" class="flex-section">
