@@ -10,16 +10,16 @@ Project Archivist stems from the code written for a [Windows Form application of
 
 ## Roadmap
 
-The application currently **does not yet function**. 
+The application currently **does not yet function**.
 
 ### Completed
 
 - Main window appearance
+- Item window appearance
+- Exclusion window appearance
 
 ### Up next for 1.0.0
 
-- Item window appearance
-- Exclusion window appearance
 - "Add" buttons open windows
 - Exclusion add/remove/edit functionality
 - Item add/remove/edit functionality
