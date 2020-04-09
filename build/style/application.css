@@ -1,7 +1,0 @@
-.current-page {
-  transform: translateX(0);
-}
-
-.hidden-page {
-  transform: translateX(200%);
-}
