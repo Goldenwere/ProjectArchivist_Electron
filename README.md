@@ -2,7 +2,7 @@
 
 ## About
 
-Project Archivist is an Electron application used for creating batch script files that execute [7-Zip add commands]() to create archives primarily for file backup purposes.
+Project Archivist is an Electron application used for creating batch script files that execute [7-Zip add commands](https://sevenzip.osdn.jp/chm/cmdline/commands/add.htm) to create archives primarily for file backup purposes.
 
 ## Origin
 
@@ -17,10 +17,10 @@ The application currently **does not yet function**.
 - Main window appearance
 - Item window appearance
 - Exclusion window appearance
+- Add/Edit/Close buttons switch pages
 
 ### Up next for 1.0.0
 
-- "Add" buttons open windows
 - Exclusion add/remove/edit functionality
 - Item add/remove/edit functionality
 - File I/O
