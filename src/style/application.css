@@ -1,7 +1,28 @@
-.current-page {
-  transform: translateX(0);
+html {
+  overflow-x: hidden;
 }
 
-.hidden-page {
+page {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   transform: translateX(200%);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0,1,1,1);
+  transition-duration: 0.5s;
+}
+
+.current-page {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(0);
+  opacity: 100%;
 }

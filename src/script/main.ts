@@ -5,8 +5,8 @@ let mainWindow: Electron.BrowserWindow;
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
     backgroundColor: "#141414",
-    width: 620,
-    height: 580,
+    width: 800,
+    height: 600,
     webPreferences: {
       webSecurity: true,
       nodeIntegration: true
@@ -14,5 +14,4 @@ app.on('ready', () => {
   });
   const indexPath = path.resolve(__dirname, '../index.html')
   mainWindow.loadFile(indexPath);
-  mainWindow.webContents.openDevTools();
 })

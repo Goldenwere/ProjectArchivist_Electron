@@ -11,7 +11,47 @@ namespace ProjectArchivist {
     exclPage = $("#Page_Excl");
 
     mainPage.toggleClass("current-page");
-    itemPage.toggleClass("hidden-page");
-    exclPage.toggleClass("hidden-page");
+
+    $("#Button_ListItems_Add").click(function() {
+      switchToFromItemPage();
+    });
+
+    $("#Button_ListItems_Edit").click(function() {
+      switchToFromItemPage();
+    });
+
+    $("#Button_Exclusions_Add").click(function() {
+      switchToFromExclPage();
+    });
+
+    $("#Button_Exclusions_Edit").click(function() {
+      switchToFromExclPage();
+    });
+
+    $("#Button_AddItem_SaveExit").click(function() {
+      switchToFromItemPage();
+    });
+
+    $("#Button_AddItem_NoSaveExit").click(function() {
+      switchToFromItemPage();
+    });
+
+    $("#Button_AddExcl_SaveExit").click(function() {
+      switchToFromExclPage();
+    });
+
+    $("#Button_AddExcl_NoSaveExit").click(function() {
+      switchToFromExclPage();
+    });
   });
+
+  function switchToFromItemPage() {
+    mainPage.toggleClass("current-page");
+    itemPage.toggleClass("current-page");
+  }
+
+  function switchToFromExclPage() {
+    itemPage.toggleClass("current-page");
+    exclPage.toggleClass("current-page");
+  }
 }

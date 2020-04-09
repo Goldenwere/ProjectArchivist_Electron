@@ -114,7 +114,7 @@
               <input type="button" value="Apply Globals" id="Button_GlobalControls_ApplyGlobals"/>
             </control>
           </section>
-          <p>⚠Warning: Applying these changes will overwrite the values stored in the items currently in the List of Archived Ites. You must edit an existing item afterward in order to make exceptions.</p>
+          <p>⚠Warning: Applying these changes will overwrite the values stored in the items currently in the List of Archived Items. You must edit an existing item afterward in order to make exceptions.</p>
         </groupbox>
       </section>
       <section id="Section_Functions" class="flex-section">
@@ -223,20 +223,20 @@
       </section>
     </page>
     <page id="Page_Excl">
-      <section id="Section_AddItem" class="flex-section">
-        <section id="Section_AddItem_ItemSettings">
-          <control id="Control_ItemSettings_Exclusion">
-            <label for="Field_ItemSettings_ItemName" id="Label_ItemSettings_ItemName">Exclusion*</label>
-            <input type="text" id="Field_ItemSettings_ItemName" name="Field_ItemSettings_ItemName"/>
+      <section id="Section_AddExcl" class="flex-section">
+        <section id="Section_AddExcl_ExclSettings">
+          <control id="Control_ExclSettings_Exclusion">
+            <label for="Field_ExclSettings_ExclName" id="Label_ExclSettings_ExclName">Exclusion*</label>
+            <input type="text" id="Field_ExclSettings_ExclName" name="Field_ExclSettings_ExclName"/>
           </control>
-          <control id="Control_ItemSettings_Recursive">
-            <label for="Checkbox_ItemSettings_Recursive" id="Label_ItemSettings_Recursive">Recursive exclusion?</label>
-            <input type="checkbox" id="Checkbox_ItemSettings_Recursive" name="Checkbox_ItemSettings_Recursive"/>
+          <control id="Control_ExclSettings_Recursive">
+            <label for="Checkbox_ExclSettings_Recursive" id="Label_ExclSettings_Recursive">Recursive exclusion?</label>
+            <input type="checkbox" id="Checkbox_ExclSettings_Recursive" name="Checkbox_ExclSettings_Recursive"/>
           </control>
         </section>
-        <section id="Section_AddItem_ExitButtons">
-          <control id="Control_AddItem_SaveExit"><input type="button" value="Save Item And Exit" id="Button_AddItem_SaveExit"/></control>
-          <control id="Control_AddItem_NoSaveExit"><input type="button" value="Exit Without Saving" id="Button_AddItem_NoSaveExit"/></control>
+        <section id="Section_AddExcl_ExitButtons">
+          <control id="Control_AddExcl_SaveExit"><input type="button" value="Save Item And Exit" id="Button_AddExcl_SaveExit"/></control>
+          <control id="Control_AddExcl_NoSaveExit"><input type="button" value="Exit Without Saving" id="Button_AddExcl_NoSaveExit"/></control>
         </section>
       </section>
     </page>
