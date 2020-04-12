@@ -79,3 +79,11 @@ input[type=checkbox]:checked:after {
   height: 1em;
 	color: rgb(20, 20, 20);
 }
+
+input:valid {
+  background-color: rgba(62, 166, 255, 0.5);
+}
+
+input:invalid {
+  background-color: rgba(255, 150, 20, 0.5);
+}

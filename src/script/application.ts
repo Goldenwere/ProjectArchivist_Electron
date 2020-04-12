@@ -1,4 +1,5 @@
 import $ from "jquery";
+import Electron from "electron";
 
 let mainPage: JQuery<HTMLElement>;
 let itemPage: JQuery<HTMLElement>;
@@ -15,6 +16,11 @@ $(document).ready(function() {
   workingIndex = 0;
   items = [];
 
+  handleWindowButtons();
+  handleItemEditorFields();
+});
+
+function handleWindowButtons() {
   $("#Button_ListItems_Add").click(function() {
     switchToFromItemPage();
   });
@@ -47,7 +53,19 @@ $(document).ready(function() {
   $("#Button_AddExcl_NoSaveExit").click(function() {
     switchToFromExclPage();
   });
-});
+}
+
+function handleItemEditorFields() {
+  updateTextWithFileDialog($("#Field_ItemSettings_ItemName"));
+  updateTextWithFileDialog($("#Field_ItemSettings_Source"));
+  updateTextWithFileDialog($("#Field_ItemSettings_Destination"));
+}
+
+function updateTextWithFileDialog(elem: JQuery<HTMLElement>) {
+  elem.dblclick(function() {
+    Electron.remote.dialog.showOpenDialog({ properties: [ 'openDirectory' ] }).then((data) => { elem.val(data.filePaths[0]); });
+  });
+}
 
 function switchToFromItemPage() {
   mainPage.toggleClass("current-page");
