@@ -59,11 +59,21 @@ function handleItemEditorFields() {
   updateTextWithFileDialog($("#Field_ItemSettings_ItemName"));
   updateTextWithFileDialog($("#Field_ItemSettings_Source"));
   updateTextWithFileDialog($("#Field_ItemSettings_Destination"));
+
+  $("#Field_ItemSettings_FileName").focusout(function() {
+    let _this = <HTMLInputElement>this;
+    _this.value = _this.value.trim();
+  });
 }
 
 function updateTextWithFileDialog(elem: JQuery<HTMLElement>) {
   elem.dblclick(function() {
     Electron.remote.dialog.showOpenDialog({ properties: [ 'openDirectory' ] }).then((data) => { elem.val(data.filePaths[0]); });
+  });
+
+  elem.focusout(function() {
+    let _this = <HTMLInputElement>this;
+    _this.value = _this.value.trim();
   });
 }
 

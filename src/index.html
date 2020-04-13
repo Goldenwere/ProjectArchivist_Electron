@@ -133,15 +133,15 @@
           </control>
           <control id="Control_ItemSettings_Source">
             <label for="Field_ItemSettings_Source" id="Label_ItemSettings_Source">Source*</label>
-            <input type="text" id="Field_ItemSettings_Source" name="Field_ItemSettings_Source"/>
+            <input type="text" id="Field_ItemSettings_Source" name="Field_ItemSettings_Source" pattern='^(.(?!(\*|\?|<|>|\||").*))*$'/>
           </control>
           <control id="Control_ItemSettings_Destination">
             <label for="Field_ItemSettings_Destination" id="Label_ItemSettings_Destination">Destination*</label>
-            <input type="text" id="Field_ItemSettings_Destination" name="Field_ItemSettings_Destination"/>
+            <input type="text" id="Field_ItemSettings_Destination" name="Field_ItemSettings_Destination" pattern='^(.(?!(\*|\?|<|>|\||").*))*$'/>
           </control>
           <control id="Control_ItemSettings_FileName">
             <label for="Field_ItemSettings_FileName" id="Label_ItemSettings_FileName">File Name*</label>
-            <input type="text" id="Field_ItemSettings_FileName" name="Field_ItemSettings_FileName"/>
+            <input type="text" id="Field_ItemSettings_FileName" name="Field_ItemSettings_FileName" pattern='^(.(?!(\*|\\|\/|:|\?|<|>|\||").*))*$'/>
           </control>
           <control id="Control_ItemSettings_Password">
             <label for="Field_ItemSettings_Password" id="Label_ItemSettings_Password">Password</label>
