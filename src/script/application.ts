@@ -5,6 +5,8 @@ let mainPage: JQuery<HTMLElement>;
 let itemPage: JQuery<HTMLElement>;
 let exclPage: JQuery<HTMLElement>;
 let items: ProjectArchivist.ArchivedItem[];
+let workingExclusions: string[];
+let workingRecursives: boolean[];
 let workingIndexItem: number;
 let workingIndexExcl: number;
 
@@ -36,7 +38,6 @@ function handleWindowButtons() {
 
   $("#Button_ListItems_Edit").click(function() {
     switchToFromItemPage();
-    items[workingIndexItem] = new ProjectArchivist.ArchivedItem();
     fillItemFields(true);
   });
 
@@ -49,6 +50,34 @@ function handleWindowButtons() {
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
+    if (items.length > workingIndexItem) {
+      items[workingIndexItem].itemName = <string>$("#Field_ItemSettings_ItemName").val();
+      items[workingIndexItem].sourcePath = <string>$("#Field_ItemSettings_Source").val();
+      items[workingIndexItem].destinationPath = <string>$("#Field_ItemSettings_Destination").val();
+      items[workingIndexItem].fileName = <string>$("#Field_ItemSettings_FileName").val();
+      items[workingIndexItem].password = <string>$("#Field_ItemSettings_Password").val();
+      items[workingIndexItem].exclusions = workingExclusions;
+      items[workingIndexItem].exclusionsRecursives = workingRecursives;
+      items[workingIndexItem].type = <any>$("#Dropdown_ItemSettings_FileType").val();
+      items[workingIndexItem].compressionLevel = Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val());
+      items[workingIndexItem].compressionMethod = <any>$("#Dropdown_ItemSettings_CompressionMethod").val();
+    }
+
+    else {
+      let item = new ProjectArchivist.ArchivedItem(
+        <string>$("#Field_ItemSettings_ItemName").val(),
+        <string>$("#Field_ItemSettings_Source").val(),
+        <string>$("#Field_ItemSettings_Destination").val(),
+        <string>$("#Field_ItemSettings_FileName").val(),
+        <string>$("#Field_ItemSettings_Password").val(),
+        workingExclusions,
+        workingRecursives,
+        <any>$("#Dropdown_ItemSettings_FileType").val(),
+        Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val()),
+        <any>$("#Dropdown_ItemSettings_CompressionMethod").val()
+      );
+      items.push(item);
+    }
     switchToFromItemPage();
   });
 

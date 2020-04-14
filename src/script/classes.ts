@@ -18,25 +18,6 @@ namespace ProjectArchivist {
   }
 
   /*
-  ** An object used for automatically sending default values to an ArchivedItem if they are defined
-  */
-  export class Globals {
-    password: string;
-    type: ArchiveType;
-    level: number;
-    method: CompressionMethod;
-    destination: string;
-
-    constructor(_password: string, _type: ArchiveType, _level: number, _method: CompressionMethod, _destination: string) {
-      this.password = _password;
-      this.type = _type;
-      this.level = _level;
-      this.method = _method;
-      this.destination = _destination;
-    }
-  }
-
-  /*
   ** An archived item represents the resulting file archive that 7-Zip would create.
   ** The information stored in an archived item outlines the command-line parameters for 7-Zip to use.
   */
@@ -60,7 +41,7 @@ namespace ProjectArchivist {
     exclusions: string[];
 
     // In 7-Zip parameters: -xr!(exclusion) vs -x!(exclusion); defines whether exclusions are top level or recursive
-    exclusionsRecursives: string[];
+    exclusionsRecursives: boolean[];
 
     // In 7-Zip parameters: -t(type); The file extension/archive format
     type: ArchiveType;
@@ -71,28 +52,17 @@ namespace ProjectArchivist {
     // In 7-Zip parameters: -m0=; the algorithm used for compression (simply ignored by 7-Zip if compressionLevel is 0)
     compressionMethod: CompressionMethod;
 
-    constructor(defaultValues?: Globals) {
-      this.itemName = "";
-      this.sourcePath = "";
-      this.fileName = "";
-      this.exclusions = [];
-      this.exclusionsRecursives = [];
-
-      if (defaultValues != undefined) {
-        this.password = defaultValues.destination;
-        this.destinationPath = defaultValues.destination;
-        this.type = defaultValues.type;
-        this.compressionLevel = defaultValues.level;
-        this.compressionMethod = defaultValues.method;
-      }
-
-      else {
-        this.password = "";
-        this.destinationPath = "";
-        this.type = Defaults.DefaultType;
-        this.compressionMethod = Defaults.DefaultMethod;
-        this.compressionLevel = Defaults.DefaultLevel;
-      }
+    constructor(_itemName: string = "", _source: string = "", _destination: string = "", _fileName: string = "", _pass: string = "", _excl: string[] = [], _exclRec: boolean[] = [], _type: ArchiveType = Defaults.DefaultType, _compLvl: number = Defaults.DefaultLevel, _compMethod: CompressionMethod = Defaults.DefaultMethod) {
+      this.itemName = _itemName;
+      this.sourcePath = _source;
+      this.destinationPath = _destination;
+      this.fileName = _fileName;
+      this.password = _pass;
+      this.exclusions = _excl;
+      this.exclusionsRecursives = _exclRec;
+      this.type = _type;
+      this.compressionLevel = _compLvl;
+      this.compressionMethod = _compMethod;
     }
   }
 }
