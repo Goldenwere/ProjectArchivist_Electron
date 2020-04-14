@@ -5,10 +5,10 @@ namespace ProjectArchivist {
   }
 
   export enum CompressionMethod {
-    lzma = "LZMA",
-    lzma2 = "LZMA2",
-    ppmd = "PPMd",
-    bzip2 = "BZip2"
+    lzma = "lzma",
+    lzma2 = "lzma2",
+    ppmd = "ppmd",
+    bzip2 = "bzip2"
   }
 
   export const Defaults = {

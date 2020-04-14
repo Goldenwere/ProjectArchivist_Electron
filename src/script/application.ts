@@ -15,6 +15,7 @@ $(document).ready(function() {
 
   mainPage.toggleClass("current-page");
   workingIndexItem = 0;
+  workingIndexExcl = 0;
   items = [];
 
   handleWindowButtons();
@@ -29,11 +30,14 @@ $(document).ready(function() {
 function handleWindowButtons() {
   $("#Button_ListItems_Add").click(function() {
     switchToFromItemPage();
+    workingIndexItem++;
+    fillItemFields(false);
   });
 
   $("#Button_ListItems_Edit").click(function() {
     switchToFromItemPage();
     items[workingIndexItem] = new ProjectArchivist.ArchivedItem();
+    fillItemFields(true);
   });
 
   $("#Button_Exclusions_Add").click(function() {
@@ -127,4 +131,31 @@ function switchToFromItemPage() {
 function switchToFromExclPage() {
   itemPage.toggleClass("current-page");
   exclPage.toggleClass("current-page");
+}
+
+/*
+** Utility function - filles up the fields for an archived item depending on whether adding or editing an item
+*/
+function fillItemFields(isEdit: boolean = false) {
+  if (isEdit) {
+    $("#Field_ItemSettings_ItemName").val(items[workingIndexItem].itemName);
+    $("#Field_ItemSettings_Source").val(items[workingIndexItem].sourcePath);
+    $("#Field_ItemSettings_Destination").val(items[workingIndexItem].destinationPath);
+    $("#Field_ItemSettings_FileName").val(items[workingIndexItem].fileName);
+    $("#Field_ItemSettings_Password").val(items[workingIndexItem].password);
+    $("#Dropdown_ItemSettings_FileType").val(items[workingIndexItem].type);
+    $("#Dropdown_ItemSettings_CompressionLevel").val(items[workingIndexItem].compressionLevel);
+    $("#Dropdown_ItemSettings_CompressionMethod").val(items[workingIndexItem].compressionMethod);
+  }
+
+  else {
+    $("#Field_ItemSettings_ItemName").val("");
+    $("#Field_ItemSettings_Source").val("");
+    $("#Field_ItemSettings_Destination").val(<string>$("#Field_GlobalControls_Destination").val());
+    $("#Field_ItemSettings_FileName").val("");
+    $("#Field_ItemSettings_Password").val(<string>$("#Field_GlobalControls_Password").val());
+    $("#Dropdown_ItemSettings_FileType").val(<string>$("#Dropdown_GlobalControls_FileType").val());
+    $("#Dropdown_ItemSettings_CompressionLevel").val(<string>$("#Dropdown_GlobalControls_CompressionLevel").val());
+    $("#Dropdown_ItemSettings_CompressionMethod").val(<string>$("#Dropdown_GlobalControls_CompressionMethod").val());
+  }
 }
