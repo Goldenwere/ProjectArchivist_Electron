@@ -1,6 +1,11 @@
 import $ from "jquery";
 import Electron from "electron";
 
+enum ListElementChildTags {
+  start = "<listelem>",
+  close = "</listelem>"
+}
+
 let mainPage: JQuery<HTMLElement>;
 let itemPage: JQuery<HTMLElement>;
 let exclPage: JQuery<HTMLElement>;
@@ -22,7 +27,6 @@ $(document).ready(function() {
 
   handleWindowButtons();
   handleItemEditorFields();
-  handleLists();
 });
 
 /*
@@ -86,6 +90,9 @@ function handleWindowButtons() {
       );
       items.push(item);
     }
+    let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ItemSettings_ItemName").val() + ListElementChildTags.close);
+    $("#List_ListItems_ArchivedItems").append(elem);
+    handleListsChildren(elem);
     switchToFromItemPage();
   });
 
@@ -103,6 +110,9 @@ function handleWindowButtons() {
       workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
       workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
     }
+    let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
+    $("#List_Exclusions_Items").append(elem);
+    handleListsChildren(elem);
     switchToFromExclPage();
   });
 
@@ -122,22 +132,13 @@ function handleItemEditorFields() {
 }
 
 /*
-** Setup function - the exclusions list and archived items list
+** Setup function - the exclusions list's and archived items list's children need events for click
 */
-function handleLists() {
-  let itemList: JQuery<HTMLElement> = $("#List_ListItems_ArchivedItems");
-  let exclList: JQuery<HTMLElement> = $("#List_Exclusions_Items");
-
-  itemList.children().on('click', e => {
-    itemList.children().removeClass("selected");
-    e.target.classList.add("selected");
-    workingIndexItem = itemList.children().index(e.target);
-  });
-
-  exclList.children().on('click', e => {
-    exclList.children().removeClass("selected");
-    e.target.classList.add("selected");
-    workingIndexExcl = exclList.children().index(e.target);
+function handleListsChildren(child: JQuery<HTMLElement>) {
+  child.click(function() {
+    child.siblings().removeClass("selected");
+    child.addClass("selected");
+    workingIndexItem = child.parent().index(child);
   });
 }
 
