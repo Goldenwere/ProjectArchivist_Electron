@@ -32,8 +32,13 @@ $(document).ready(function() {
 function handleWindowButtons() {
   $("#Button_ListItems_Add").click(function() {
     switchToFromItemPage();
-    workingIndexItem++;
     fillItemFields(false);
+    workingIndexItem++;
+
+    // New items mean that the working exclusions set needs reset
+    workingIndexExcl = 0;
+    workingExclusions = [];
+    workingRecursives = [];
   });
 
   $("#Button_ListItems_Edit").click(function() {
@@ -43,10 +48,13 @@ function handleWindowButtons() {
 
   $("#Button_Exclusions_Add").click(function() {
     switchToFromExclPage();
+    fillExclusionFields(false);
+    workingIndexExcl++;
   });
 
   $("#Button_Exclusions_Edit").click(function() {
     switchToFromExclPage();
+    fillExclusionFields(true);
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
@@ -86,6 +94,15 @@ function handleWindowButtons() {
   });
 
   $("#Button_AddExcl_SaveExit").click(function() {
+    if (workingExclusions.length > workingIndexExcl) {
+      workingExclusions[workingIndexExcl] = <string>$("#Field_ExclSettings_ExclName").val();
+      workingRecursives[workingIndexExcl] = <boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked");
+    }
+
+    else {
+      workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
+      workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
+    }
     switchToFromExclPage();
   });
 
@@ -163,7 +180,7 @@ function switchToFromExclPage() {
 }
 
 /*
-** Utility function - filles up the fields for an archived item depending on whether adding or editing an item
+** Utility function - fills up the fields for an archived item depending on whether adding or editing an item
 */
 function fillItemFields(isEdit: boolean = false) {
   if (isEdit) {
@@ -186,5 +203,20 @@ function fillItemFields(isEdit: boolean = false) {
     $("#Dropdown_ItemSettings_FileType").val(<string>$("#Dropdown_GlobalControls_FileType").val());
     $("#Dropdown_ItemSettings_CompressionLevel").val(<string>$("#Dropdown_GlobalControls_CompressionLevel").val());
     $("#Dropdown_ItemSettings_CompressionMethod").val(<string>$("#Dropdown_GlobalControls_CompressionMethod").val());
+  }
+}
+
+/*
+** Utility function - fills up the fields for an exclusion depending on whether adding or editing an exclusion
+*/
+function fillExclusionFields(isEdit: boolean = false) {
+  if (isEdit) {
+    $("#Field_ExclSettings_ExclName").val(workingExclusions[workingIndexExcl]);
+    $("#Checkbox_ExclSettings_Recursive").prop("checked", workingRecursives[workingIndexExcl]);
+  }
+
+  else {
+    $("#Field_ExclSettings_ExclName").val("");
+    $("#Checkbox_ExclSettings_Recursive").prop("checked", false);
   }
 }
