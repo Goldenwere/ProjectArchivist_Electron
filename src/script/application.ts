@@ -55,6 +55,12 @@ function handleWindowButtons() {
     workingRecursives = items[workingIndexItem].exclusionsRecursives;
   });
 
+  $("#Button_ListItems_Remove").click(function() {
+    items.splice(workingIndexItem, 1);
+    $("#List_ListItems_ArchivedItems").children()[workingIndexItem].remove();
+    workingIndexItem--;
+  });
+
   $("#Button_Exclusions_Add").click(function() {
     switchToFromExclPage();
     fillExclusionFields(false);
@@ -64,6 +70,12 @@ function handleWindowButtons() {
   $("#Button_Exclusions_Edit").click(function() {
     switchToFromExclPage();
     fillExclusionFields(true);
+  });
+
+  $("#Button_Exclusions_Remove").click(function() {
+    workingExclusions.splice(workingIndexExcl, 1);
+    $("#List_Exclusions_Items").children()[workingIndexExcl].remove();
+    workingIndexExcl--;
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
