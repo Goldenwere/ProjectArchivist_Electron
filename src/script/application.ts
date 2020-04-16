@@ -37,7 +37,7 @@ function handleWindowButtons() {
   $("#Button_ListItems_Add").click(function() {
     switchToFromItemPage();
     fillItemFields(false);
-    workingIndexItem++;
+    workingIndexItem = items.length;
 
     // New items mean that the working exclusions set needs reset
     workingIndexExcl = 0;
@@ -48,12 +48,17 @@ function handleWindowButtons() {
   $("#Button_ListItems_Edit").click(function() {
     switchToFromItemPage();
     fillItemFields(true);
+
+    // Editing items mean that the working exclusions set needs reset
+    workingIndexExcl = 0;
+    workingExclusions = items[workingIndexItem].exclusions;
+    workingRecursives = items[workingIndexItem].exclusionsRecursives;
   });
 
   $("#Button_Exclusions_Add").click(function() {
     switchToFromExclPage();
     fillExclusionFields(false);
-    workingIndexExcl++;
+    workingIndexExcl = workingExclusions.length;
   });
 
   $("#Button_Exclusions_Edit").click(function() {
@@ -73,6 +78,8 @@ function handleWindowButtons() {
       items[workingIndexItem].type = <any>$("#Dropdown_ItemSettings_FileType").val();
       items[workingIndexItem].compressionLevel = Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val());
       items[workingIndexItem].compressionMethod = <any>$("#Dropdown_ItemSettings_CompressionMethod").val();
+
+      $("#List_ListItems_ArchivedItems").children()[workingIndexItem].innerHTML = <string>$("#Field_ItemSettings_ItemName").val();
     }
 
     else {
@@ -89,10 +96,13 @@ function handleWindowButtons() {
         <any>$("#Dropdown_ItemSettings_CompressionMethod").val()
       );
       items.push(item);
+
+      let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ItemSettings_ItemName").val() + ListElementChildTags.close);
+      $("#List_ListItems_ArchivedItems").append(elem);
+      handleListsChildren(elem, false);
+      $("#List_ListItems_ArchivedItems").children().removeClass("selected");
     }
-    let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ItemSettings_ItemName").val() + ListElementChildTags.close);
-    $("#List_ListItems_ArchivedItems").append(elem);
-    handleListsChildren(elem);
+
     switchToFromItemPage();
   });
 
@@ -104,15 +114,20 @@ function handleWindowButtons() {
     if (workingExclusions.length > workingIndexExcl) {
       workingExclusions[workingIndexExcl] = <string>$("#Field_ExclSettings_ExclName").val();
       workingRecursives[workingIndexExcl] = <boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked");
+
+      $("#List_Exclusions_Items").children()[workingIndexExcl].innerHTML = <string>$("#Field_ExclSettings_ExclName").val();
     }
 
     else {
       workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
       workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
+
+      let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
+      $("#List_Exclusions_Items").append(elem);
+      handleListsChildren(elem, true);
+      $("#List_Exclusions_Items").children().removeClass("selected");
     }
-    let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
-    $("#List_Exclusions_Items").append(elem);
-    handleListsChildren(elem);
+
     switchToFromExclPage();
   });
 
@@ -134,11 +149,14 @@ function handleItemEditorFields() {
 /*
 ** Setup function - the exclusions list's and archived items list's children need events for click
 */
-function handleListsChildren(child: JQuery<HTMLElement>) {
+function handleListsChildren(child: JQuery<HTMLElement>, isExclusion: boolean) {
   child.click(function() {
     child.siblings().removeClass("selected");
     child.addClass("selected");
-    workingIndexItem = child.parent().index(child);
+    if (isExclusion)
+      workingIndexExcl = child.parent().children().index(child);
+    else
+      workingIndexItem = child.parent().children().index(child);
   });
 }
 
@@ -184,6 +202,9 @@ function switchToFromExclPage() {
 ** Utility function - fills up the fields for an archived item depending on whether adding or editing an item
 */
 function fillItemFields(isEdit: boolean = false) {
+  let listExcl: JQuery<HTMLElement> = $("#List_Exclusions_Items");
+  listExcl.empty();
+
   if (isEdit) {
     $("#Field_ItemSettings_ItemName").val(items[workingIndexItem].itemName);
     $("#Field_ItemSettings_Source").val(items[workingIndexItem].sourcePath);
@@ -193,6 +214,12 @@ function fillItemFields(isEdit: boolean = false) {
     $("#Dropdown_ItemSettings_FileType").val(items[workingIndexItem].type);
     $("#Dropdown_ItemSettings_CompressionLevel").val(items[workingIndexItem].compressionLevel);
     $("#Dropdown_ItemSettings_CompressionMethod").val(items[workingIndexItem].compressionMethod);
+
+    items[workingIndexItem].exclusions.forEach(e => {
+      let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + e + ListElementChildTags.close);
+      $("#List_Exclusions_Items").append(elem);
+      handleListsChildren(elem, true);
+    });
   }
 
   else {

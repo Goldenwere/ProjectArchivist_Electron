@@ -70,7 +70,7 @@ input[type=checkbox]:checked {
 
 input[type=checkbox]:checked:after {
 	content: "";
-  background-image: url(checkbox.png);
+  background-image: url("../media/checkbox.png");
   background-size: cover;
   position: absolute;
   top: 0.25em;
