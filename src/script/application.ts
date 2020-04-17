@@ -79,43 +79,45 @@ function handleWindowButtons() {
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
-    if (items.length > workingIndexItem) {
-      items[workingIndexItem].itemName = <string>$("#Field_ItemSettings_ItemName").val();
-      items[workingIndexItem].sourcePath = <string>$("#Field_ItemSettings_Source").val();
-      items[workingIndexItem].destinationPath = <string>$("#Field_ItemSettings_Destination").val();
-      items[workingIndexItem].fileName = <string>$("#Field_ItemSettings_FileName").val();
-      items[workingIndexItem].password = <string>$("#Field_ItemSettings_Password").val();
-      items[workingIndexItem].exclusions = workingExclusions;
-      items[workingIndexItem].exclusionsRecursives = workingRecursives;
-      items[workingIndexItem].type = <any>$("#Dropdown_ItemSettings_FileType").val();
-      items[workingIndexItem].compressionLevel = Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val());
-      items[workingIndexItem].compressionMethod = <any>$("#Dropdown_ItemSettings_CompressionMethod").val();
+    if (validateItemFields()) {
+      if (items.length > workingIndexItem) {
+        items[workingIndexItem].itemName = <string>$("#Field_ItemSettings_ItemName").val();
+        items[workingIndexItem].sourcePath = <string>$("#Field_ItemSettings_Source").val();
+        items[workingIndexItem].destinationPath = <string>$("#Field_ItemSettings_Destination").val();
+        items[workingIndexItem].fileName = <string>$("#Field_ItemSettings_FileName").val();
+        items[workingIndexItem].password = <string>$("#Field_ItemSettings_Password").val();
+        items[workingIndexItem].exclusions = workingExclusions;
+        items[workingIndexItem].exclusionsRecursives = workingRecursives;
+        items[workingIndexItem].type = <any>$("#Dropdown_ItemSettings_FileType").val();
+        items[workingIndexItem].compressionLevel = Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val());
+        items[workingIndexItem].compressionMethod = <any>$("#Dropdown_ItemSettings_CompressionMethod").val();
 
-      $("#List_ListItems_ArchivedItems").children()[workingIndexItem].innerHTML = <string>$("#Field_ItemSettings_ItemName").val();
+        $("#List_ListItems_ArchivedItems").children()[workingIndexItem].innerHTML = <string>$("#Field_ItemSettings_ItemName").val();
+      }
+
+      else {
+        let item = new ProjectArchivist.ArchivedItem(
+          <string>$("#Field_ItemSettings_ItemName").val(),
+          <string>$("#Field_ItemSettings_Source").val(),
+          <string>$("#Field_ItemSettings_Destination").val(),
+          <string>$("#Field_ItemSettings_FileName").val(),
+          <string>$("#Field_ItemSettings_Password").val(),
+          workingExclusions,
+          workingRecursives,
+          <any>$("#Dropdown_ItemSettings_FileType").val(),
+          Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val()),
+          <any>$("#Dropdown_ItemSettings_CompressionMethod").val()
+        );
+        items.push(item);
+
+        let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ItemSettings_ItemName").val() + ListElementChildTags.close);
+        $("#List_ListItems_ArchivedItems").append(elem);
+        handleListsChildren(elem, false);
+        $("#List_ListItems_ArchivedItems").children().removeClass("selected");
+      }
+
+      switchToFromItemPage();
     }
-
-    else {
-      let item = new ProjectArchivist.ArchivedItem(
-        <string>$("#Field_ItemSettings_ItemName").val(),
-        <string>$("#Field_ItemSettings_Source").val(),
-        <string>$("#Field_ItemSettings_Destination").val(),
-        <string>$("#Field_ItemSettings_FileName").val(),
-        <string>$("#Field_ItemSettings_Password").val(),
-        workingExclusions,
-        workingRecursives,
-        <any>$("#Dropdown_ItemSettings_FileType").val(),
-        Number.parseInt(<string>$("#Dropdown_ItemSettings_CompressionLevel").val()),
-        <any>$("#Dropdown_ItemSettings_CompressionMethod").val()
-      );
-      items.push(item);
-
-      let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ItemSettings_ItemName").val() + ListElementChildTags.close);
-      $("#List_ListItems_ArchivedItems").append(elem);
-      handleListsChildren(elem, false);
-      $("#List_ListItems_ArchivedItems").children().removeClass("selected");
-    }
-
-    switchToFromItemPage();
   });
 
   $("#Button_AddItem_NoSaveExit").click(function() {
@@ -123,24 +125,27 @@ function handleWindowButtons() {
   });
 
   $("#Button_AddExcl_SaveExit").click(function() {
-    if (workingExclusions.length > workingIndexExcl) {
-      workingExclusions[workingIndexExcl] = <string>$("#Field_ExclSettings_ExclName").val();
-      workingRecursives[workingIndexExcl] = <boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked");
+    if (validateExclusionFields()) {
+      if (workingExclusions.length > workingIndexExcl) {
+        workingExclusions[workingIndexExcl] = <string>$("#Field_ExclSettings_ExclName").val();
+        workingRecursives[workingIndexExcl] = <boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked");
 
-      $("#List_Exclusions_Items").children()[workingIndexExcl].innerHTML = <string>$("#Field_ExclSettings_ExclName").val();
+        $("#List_Exclusions_Items").children()[workingIndexExcl].innerHTML = <string>$("#Field_ExclSettings_ExclName").val();
+      }
+
+      else {
+        workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
+        workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
+
+        let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
+        $("#List_Exclusions_Items").append(elem);
+        handleListsChildren(elem, true);
+        $("#List_Exclusions_Items").children().removeClass("selected");
+      }
+
+
+      switchToFromExclPage();
     }
-
-    else {
-      workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
-      workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
-
-      let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
-      $("#List_Exclusions_Items").append(elem);
-      handleListsChildren(elem, true);
-      $("#List_Exclusions_Items").children().removeClass("selected");
-    }
-
-    switchToFromExclPage();
   });
 
   $("#Button_AddExcl_NoSaveExit").click(function() {
@@ -259,4 +264,57 @@ function fillExclusionFields(isEdit: boolean = false) {
     $("#Field_ExclSettings_ExclName").val("");
     $("#Checkbox_ExclSettings_Recursive").prop("checked", false);
   }
+}
+
+/*
+** Utility function - determines whether items are valid or not, visually displays invalid items, and prevents progress if any are present
+*/
+function validateItemFields() {
+  let valid: boolean = true;
+
+  let itemName: HTMLInputElement = <HTMLInputElement>$("#Field_ItemSettings_ItemName").get()[0];
+  let itemSrc: HTMLInputElement = <HTMLInputElement>$("#Field_ItemSettings_Source").get()[0];
+  let itemDest: HTMLInputElement = <HTMLInputElement>$("#Field_ItemSettings_Destination").get()[0];
+  let itemFile: HTMLInputElement = <HTMLInputElement>$("#Field_ItemSettings_FileName").get()[0];
+
+  let elements: HTMLInputElement[] = [ itemName, itemSrc, itemDest, itemFile ];
+
+  elements.forEach(element => {
+    if (element.value == "" || !element.checkValidity()) {
+      valid = false;
+      let old = element;
+      let clone: HTMLElement = <HTMLElement>old.cloneNode(true);
+      old.before(clone);
+      old.remove();
+      clone.classList.add("invalid-item");
+    }
+
+    else
+      element.classList.remove("invalid-item");
+  });
+
+  return valid;
+}
+
+/*
+** Utility function - determines whether exclusions are valid or not, visually displays invalid entries, and prevents progress if any are present
+*/
+function validateExclusionFields() {
+  let valid: boolean = true;
+
+  let exclName: HTMLInputElement = <HTMLInputElement>$("#Field_ExclSettings_ExclName").get()[0];
+
+  if (exclName.value == "" || !exclName.checkValidity()) {
+    valid = false;
+    let old = exclName;
+    let clone: HTMLElement = <HTMLElement>old.cloneNode(true);
+    old.before(clone);
+    old.remove();
+    clone.classList.add("invalid-item");
+  }
+
+  else
+    exclName.classList.remove("invalid-item");
+
+  return valid;
 }

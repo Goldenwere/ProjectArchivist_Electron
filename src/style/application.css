@@ -26,3 +26,30 @@ page {
   transform: translateX(0);
   opacity: 100%;
 }
+
+.invalid-item {
+  transition: translate 0.25s linear;
+  animation: invalid-ani 0.25s 4;
+}
+
+@keyframes invalid-ani {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-1em);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(1em);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
