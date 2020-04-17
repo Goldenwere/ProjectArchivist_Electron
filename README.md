@@ -19,10 +19,10 @@ The application currently **does not yet function**.
 - Exclusion window appearance
 - Add/Edit/Close buttons switch pages
 - Exclusion add/remove/edit functionality
+- Item add/remove/edit functionality
 
 ### Up next for 1.0.0
 
-- Item add/remove/edit functionality
 - File I/O
 - Error-case handling
 
