@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "declaration": true,
     "esModuleInterop": true,
     "lib": [ "esnext", "dom" ],
@@ -12,10 +12,11 @@
     "strict": true,
     "target": "esnext",
     "paths": {
-      "*": ["node_modules/*"]
+      "*": ["*"],
+      "~/*": [ "src/script/*" ]
     }
   },
   "include": [
-    "src/"
+    "src/**/*.ts"
   ]
 }

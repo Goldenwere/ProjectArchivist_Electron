@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import * as Electron from "electron";
-import { writeScript } from './util';
-import { ArchivedItem } from './classes';
+import { writeScript } from '~/util';
+import { ArchivedItem } from '~/classes';
 
 enum ListElementChildTags {
   start = "<listelem>",
