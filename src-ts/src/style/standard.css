@@ -1,0 +1,71 @@
+html {
+  font: caption;
+}
+
+::-webkit-scrollbar {
+    width: 1em;
+}
+
+.flex-section {
+  width: 100%;
+  display: flex;
+}
+
+.flex-section:nth-of-type(1) {
+  margin-top: 2em;
+}
+
+.flex-section {
+  margin-bottom: 2em;
+}
+
+.flex-section:last-of-type {
+  margin-bottom: 0;
+}
+
+groupbox {
+  flex: 1 1 20%;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0 1em ;
+  margin: 0 0.25em;
+}
+
+groupbox h1 {
+  transform: translateY(-1.5em);
+  position: absolute;
+  display: inline-block;
+  margin: 1em 0.25em;
+  padding: 0 0.5em;
+}
+
+groupbox .controls {
+  margin: 2em 0;
+}
+
+control {
+  display: block;
+  margin: 0.25em 0;
+}
+
+listbox, listelem {
+  display: block;
+}
+
+listbox, input[type=button], input[type=text], select, ::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
+  padding: 0.33em;
+  border-radius: 2px;
+}
+
+listbox, input[type=text] {
+  border-style: solid !important;
+  border-width: 1px;
+}
+
+select, input[type=button] {
+  border-style: none;
+}
+
+select, input[type=text] {
+  width: 100%;
+}
