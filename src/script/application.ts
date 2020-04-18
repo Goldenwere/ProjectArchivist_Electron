@@ -1,5 +1,7 @@
-import $ = require('jquery');
+import $ from 'jquery';
 import * as Electron from "electron";
+import { writeScript } from './util';
+import { ArchivedItem } from './classes';
 
 enum ListElementChildTags {
   start = "<listelem>",
@@ -9,7 +11,7 @@ enum ListElementChildTags {
 let mainPage: JQuery<HTMLElement>;
 let itemPage: JQuery<HTMLElement>;
 let exclPage: JQuery<HTMLElement>;
-let items: ProjectArchivist.ArchivedItem[];
+let items: ArchivedItem[];
 let workingExclusions: string[];
 let workingRecursives: boolean[];
 let workingIndexItem: number;
@@ -36,7 +38,7 @@ $(document).ready(function() {
 function handleWindowButtons() {
   $("#Button_Archiving_CreateScript").click(function() {
     if (validateMainFields()) {
-      ProjectArchivist.writeScript(items, <string>$("#Field_FileSettings_SavePath").val());
+      writeScript(items, <string>$("#Field_FileSettings_SavePath").val());
     }
   });
 
@@ -102,7 +104,7 @@ function handleWindowButtons() {
       }
 
       else {
-        let item = new ProjectArchivist.ArchivedItem(
+        let item = new ArchivedItem(
           <string>$("#Field_ItemSettings_ItemName").val(),
           <string>$("#Field_ItemSettings_Source").val(),
           <string>$("#Field_ItemSettings_Destination").val(),
