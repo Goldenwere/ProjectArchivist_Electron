@@ -1,5 +1,5 @@
-import $ from "jquery";
-import Electron from "electron";
+import $ = require('jquery');
+import * as Electron from "electron";
 
 enum ListElementChildTags {
   start = "<listelem>",
@@ -34,6 +34,12 @@ $(document).ready(function() {
 ** Because they are grouped with add/edit, remove buttons are also in here, though they don't necessarily change the entire page
 */
 function handleWindowButtons() {
+  $("#Button_Archiving_CreateScript").click(function() {
+    if (validateMainFields()) {
+      ProjectArchivist.writeScript(items, <string>$("#Field_FileSettings_SavePath").val());
+    }
+  });
+
   $("#Button_ListItems_Add").click(function() {
     switchToFromItemPage();
     fillItemFields(false);
@@ -157,8 +163,9 @@ function handleWindowButtons() {
 ** Setup function - fields contained in the archive item editor
 */
 function handleItemEditorFields() {
-  updateTextWithFileDialog($("#Field_ItemSettings_Source"));
-  updateTextWithFileDialog($("#Field_ItemSettings_Destination"));
+  updateTextWithFileDialog($("#Field_ItemSettings_Source"), true);
+  updateTextWithFileDialog($("#Field_ItemSettings_Destination"), true);
+  updateTextWithFileDialog($("#Field_FileSettings_SavePath"), false);
   updateTextWithTrimming($("#Field_ItemSettings_FileName"));
   updateTextWithTrimming($("#Field_ItemSettings_ItemName"));
 }
@@ -181,10 +188,18 @@ function handleListsChildren(child: JQuery<HTMLElement>, isExclusion: boolean) {
 ** Helper function - adds path dialog to path-based inputs
 ** Also calls updateTextWithTrimming() to add trimming as path-based inputs are in turn file-based inputs
 */
-function updateTextWithFileDialog(elem: JQuery<HTMLElement>) {
-  elem.dblclick(function() {
-    Electron.remote.dialog.showOpenDialog({ properties: [ 'openDirectory' ] }).then((data) => { elem.val(data.filePaths[0]); });
-  });
+function updateTextWithFileDialog(elem: JQuery<HTMLElement>, isFolder: boolean = false) {
+  if (isFolder) {
+    elem.dblclick(function() {
+      Electron.remote.dialog.showOpenDialog({ properties: [ 'openDirectory' ] }).then((data) => { elem.val(data.filePaths[0]); });
+    });
+  }
+
+  else {
+    elem.dblclick(function() {
+      Electron.remote.dialog.showOpenDialog({ filters: [ { name: 'Batch Scripts', extensions: [ 'bat' ] } ], properties: [ 'promptToCreate' ] }).then((data) => { elem.val(data.filePaths[0]); });
+    });
+  }
 
   updateTextWithTrimming(elem);
 }
@@ -317,4 +332,47 @@ function validateExclusionFields() {
     exclName.classList.remove("invalid-item");
 
   return valid;
+}
+
+/*
+** Utility function - determines whether main settings are valid or not, visually displays invalid entries, and prevents progress if any are present
+*/
+function validateMainFields() {
+  let valid: boolean = true;
+
+  let scriptFile: HTMLInputElement = <HTMLInputElement>$("#Field_FileSettings_SavePath").get()[0];
+  let itemsList: JQuery<HTMLElement> = $("#List_ListItems_ArchivedItems");
+
+  if (scriptFile.value == "" || !scriptFile.checkValidity()) {
+    valid = false;
+    let old = scriptFile;
+    let clone: HTMLElement = <HTMLElement>old.cloneNode(true);
+    old.before(clone);
+    old.remove();
+    clone.classList.add("invalid-item");
+  }
+
+  else
+    scriptFile.classList.remove("invalid-item");
+
+  if (itemsList.children().length <= 0) {
+    valid = false;
+    let old = itemsList;
+    let clone = old.clone();
+    clone.appendTo(old.parent());
+    old.remove();
+    clone.addClass("invalid-item");
+  }
+
+  else
+    itemsList.removeClass("invalid-item");
+
+  return valid;
+}
+
+/*
+**  Utility function - determines whether globals are valid or not, visually displays invalid entries, and prevents progress if any are present
+*/
+function validateGlobalFields() {
+
 }

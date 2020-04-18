@@ -2,5 +2,5 @@
 rmdir build /S /Q
 xcopy /E /I "src" "build"
 del "build\script" /F /Q
-npm start
+call npm start
 PAUSE
