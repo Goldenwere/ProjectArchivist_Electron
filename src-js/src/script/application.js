@@ -6,16 +6,8 @@ const ListElementChildTags = {
   close: "</listelem>"
 }
 
-let mainPage;
-let itemPage;
-let exclPage;
-let items;
-let workingExclusions;
-let workingRecursives;
-let workingIndexItem;
-let workingIndexExcl;
-let errWinDesc;
-let errWinAddl;
+let mainPage, itemPage, exclPage, errWinDesc, errWinAddl;
+let items, workingExclusions, workingRecursives, workingIndexItem, workingIndexExcl;
 
 $(document).ready(function() {
   mainPage = $("#Page_Main");
