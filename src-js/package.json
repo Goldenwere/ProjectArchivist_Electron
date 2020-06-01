@@ -1,0 +1,16 @@
+{
+  "name": "project-archivist",
+  "version": "1.0.0",
+  "description": "Creates batch scripts for use in archival/backup purposes using the 7-Zip add command",
+  "main": "src/script/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Lightling",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^8.2.1",
+    "jquery": "^3.4.1"
+  }
+}
