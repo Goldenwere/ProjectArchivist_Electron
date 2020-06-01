@@ -83,3 +83,8 @@ input[type=checkbox]:checked:after {
 input:invalid, .invalid-item {
   background-color: rgba(255, 150, 20, 0.5) !important;
 }
+
+.error-window {
+  border-color: orange;
+  background-color: rgb(20, 20, 20);
+}

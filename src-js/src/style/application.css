@@ -53,3 +53,26 @@ page {
     transform: translateX(0);
   }
 }
+
+.error-window {
+  position: absolute;
+  top: 2rem;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  border-width: 0.1rem;
+  border-style: solid;
+}
+
+.error-window-hidden {
+  display: none;
+}
+
+#Window_Error_Overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}

@@ -157,6 +157,29 @@ function handleWindowButtons() {
   $("#Button_AddExcl_NoSaveExit").click(function() {
     switchToFromExclPage();
   });
+
+  $("#Button_GlobalControls_ApplyGlobals").click(function() {
+    let duplicates = validateGlobalFields();
+    if (duplicates.length == 0) {
+      for (let i = 0; i < items.length; i++) {
+        items[i].password = $("#Field_GlobalControls_Password").val();
+        items[i].type = $("#Dropdown_GlobalControls_FileType").val();
+        items[i].compressionMethod = $("#Dropdown_GlobalControls_CompressionMethod").val();
+        items[i].compressionLevel = Number.parseInt($("#Dropdown_GlobalControls_CompressionLevel").val());
+        items[i].destinationPath = $("#Field_GlobalControls_Destination").val();
+      }
+    }
+
+    else {
+      $("#Window_Error").removeClass("error-window-hidden");
+      $("#Window_Error_Overlay").removeClass("error-window-hidden");
+    }
+  });
+
+  $("#Button_Error_Acknowledge").click(function() {
+    $("#Window_Error").addClass("error-window-hidden");
+    $("#Window_Error_Overlay").addClass("error-window-hidden");
+  });
 }
 
 /*
@@ -165,6 +188,7 @@ function handleWindowButtons() {
 function handleItemEditorFields() {
   updateTextWithFileDialog($("#Field_ItemSettings_Source"), true);
   updateTextWithFileDialog($("#Field_ItemSettings_Destination"), true);
+  updateTextWithFileDialog($("#Field_GlobalControls_Destination"), true);
   updateTextWithFileDialog($("#Field_FileSettings_SavePath"), false);
   updateTextWithTrimming($("#Field_ItemSettings_FileName"));
   updateTextWithTrimming($("#Field_ItemSettings_ItemName"));
@@ -374,5 +398,14 @@ function validateMainFields() {
 **  Utility function - determines whether globals are valid or not, visually displays invalid entries, and prevents progress if any are present
 */
 function validateGlobalFields() {
+  let duplicates = [];
 
+  for (let i = 0; i < items.length; i++) {
+    for (let j = 0; j < items.length; j++) {
+      if (i != j && items[i].fileName == items[j].fileName && !duplicates.includes(items[i].fileName))
+        duplicates.push(items[i].fileName);
+    }
+  }
+
+  return duplicates;
 }
