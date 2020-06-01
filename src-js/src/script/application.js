@@ -328,8 +328,26 @@ function validateItemFields() {
       clone.classList.add("invalid-item");
     }
 
-    else
-      element.classList.remove("invalid-item");
+    else {
+      let invalidMessages = [];
+      for (let i = 0; i < items.length; i++) {
+        if (itemName.value == items[i].itemName)
+          invalidMessages.push("Item name already exists");
+
+        if (items[i].destinationPath == itemDest.value && items[i].fileName == itemFile.value)
+          invalidMessages.push("Item has same destination path and file name as " + items[i].itemName);
+      }
+
+      if (invalidMessages.length > 0) {
+        console.log(invalidMessages);
+        valid = false;
+        $("#Window_Error").removeClass("error-window-hidden");
+        $("#Window_Error_Overlay").removeClass("error-window-hidden");
+      }
+
+      else
+        element.classList.remove("invalid-item");
+    }
   });
 
   return valid;
