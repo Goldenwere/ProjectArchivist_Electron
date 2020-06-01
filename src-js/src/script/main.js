@@ -11,7 +11,7 @@ app.on('ready', () => {
       nodeIntegration: true
     }
   });
-  mainWindow.webContents.toggleDevTools();
+  //mainWindow.webContents.toggleDevTools();
   const indexPath = path.resolve(__dirname, '../index.html')
   mainWindow.loadFile(indexPath);
 })

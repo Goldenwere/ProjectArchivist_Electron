@@ -33,7 +33,7 @@ function writeScript(items, destination) {
   let out = MSG_BEGIN;
 
   items.forEach(item => {
-    out += MSG_CURRENT_PREFIX + item.itemName + NEWLINE + CMD;
+    out += MSG_CURRENT_PREFIX + item.itemName + NEWLINE + CMD + SPACE;
 
     if (item.type == ArchiveType.sevenz)
       out += PARAM_TYPE + EXTENSION_SEVENZIP + SPACE;

@@ -1,5 +1,19 @@
 window.$ = window.jQuery = require('jquery');
 
+const ListElementChildTags = {
+  start: "<listelem>",
+  close: "</listelem>"
+}
+
+let mainPage;
+let itemPage;
+let exclPage;
+let items;
+let workingExclusions;
+let workingRecursives;
+let workingIndexItem;
+let workingIndexExcl;
+
 $(document).ready(function() {
   mainPage = $("#Page_Main");
   itemPage = $("#Page_Item");
@@ -13,7 +27,6 @@ $(document).ready(function() {
   handleWindowButtons();
   handleItemEditorFields();
 });
-
 
 /*
 ** Setup function - all buttons that in some way change page states in the window (add, edit, save/exit)
@@ -324,7 +337,7 @@ function validateExclusionFields() {
 ** Utility function - determines whether main settings are valid or not, visually displays invalid entries, and prevents progress if any are present
 */
 function validateMainFields() {
-  let valid= true;
+  let valid = true;
 
   let scriptFile = $("#Field_FileSettings_SavePath").get()[0];
   let itemsList = $("#List_ListItems_ArchivedItems");
