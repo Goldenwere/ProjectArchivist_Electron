@@ -14,11 +14,16 @@ let workingExclusions;
 let workingRecursives;
 let workingIndexItem;
 let workingIndexExcl;
+let errWinDesc;
+let errWinAddl;
 
 $(document).ready(function() {
   mainPage = $("#Page_Main");
   itemPage = $("#Page_Item");
   exclPage = $("#Page_Excl");
+
+  errWinDesc = $("#Error_Desc");
+  errWinAddl = $("#Error_Additional");
 
   mainPage.toggleClass("current-page");
   workingIndexItem = 0;
@@ -173,6 +178,12 @@ function handleWindowButtons() {
     else {
       $("#Window_Error").removeClass("error-window-hidden");
       $("#Window_Error_Overlay").removeClass("error-window-hidden");
+      errWinDesc.html("There are items that have the same file name that applying a global destination path would create invalid items. Either change the file names for these items or change the destination path");
+      let inner = "";
+      for (let i = 0; i < duplicates.length - 1; i++)
+        inner += duplicates[i] + ", ";
+      inner += duplicates[duplicates.length - 1];
+      errWinAddl.html(inner);
     }
   });
 
@@ -339,10 +350,14 @@ function validateItemFields() {
       }
 
       if (invalidMessages.length > 0) {
-        console.log(invalidMessages);
         valid = false;
         $("#Window_Error").removeClass("error-window-hidden");
         $("#Window_Error_Overlay").removeClass("error-window-hidden");
+        errWinDesc.html("Item has conflicts with existing items");
+        let inner = "";
+        for (let i = 0; i < invalidMessages.length; i++)
+          inner += invalidMessages[i] + "<br/>";
+        errWinAddl.html(inner);
       }
 
       else
@@ -420,8 +435,12 @@ function validateGlobalFields() {
 
   for (let i = 0; i < items.length; i++) {
     for (let j = 0; j < items.length; j++) {
-      if (i != j && items[i].fileName == items[j].fileName && !duplicates.includes(items[i].fileName))
-        duplicates.push(items[i].fileName);
+      if (i != j && items[i].fileName == items[j].fileName) {
+        if(!duplicates.includes(items[i].itemName))
+          duplicates.push(items[i].itemName);
+        if(!duplicates.includes(items[j].itemName))
+          duplicates.push(items[j].itemName);
+      }
     }
   }
 
