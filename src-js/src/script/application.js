@@ -1,4 +1,5 @@
 window.$ = window.jQuery = require('jquery');
+Electron = require('electron');
 
 const ListElementChildTags = {
   start: "<listelem>",
