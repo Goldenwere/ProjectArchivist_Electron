@@ -10,6 +10,7 @@ const CMD = "7z a";
 const SPACE = " ";
 const QUOTE = "\"";
 const NEWLINE = "\n";
+const ASTERISK = "\\*";
 
 const PARAM_LEVEL = "-mx=";
 const PARAM_ENCRYPT = "-mhe";
@@ -71,6 +72,8 @@ function writeScript(items, destination) {
       out += "." + EXTENSION_SEVENZIP + QUOTE + SPACE;
     else
       out += "." + EXTENSION_ZIP + QUOTE + SPACE;
+
+    out += QUOTE + item.sourcePath + ASTERISK + QUOTE + NEWLINE;
   });
 
   fs.writeFile(destination, out, function (err) {
