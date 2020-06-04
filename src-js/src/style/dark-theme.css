@@ -25,13 +25,13 @@ groupbox h1 {
   font-size: 1.25em;
 }
 
-input:focus, input:hover, input:active, listelem:hover, listelem:active {
-  transition-property: background-color, color, opacity;
+input:focus, input:hover, input:active, listelem:hover, listelem:active, select:focus, select:hover {
+  transition-property: background-color, color, opacity, outline;
   transition-timing-function: cubic-bezier(0,1,1,1);
   transition-duration: 0.5s;
 }
 
-listbox, input[type=text], input[type=number], select, input[type=button] {
+listbox, input[type=text], input[type=button], select {
   background-color: rgb(50, 50, 50);
   color: rgb(220, 220, 220);
   border-color: rgb(100, 100, 100);
@@ -43,6 +43,12 @@ listbox, input[type=text], input[type=number], select, input[type=button] {
 
 input[type=button]:hover, listelem:hover, input[type="checkbox"]:hover {
   background-color: rgb(60, 60, 100);
+}
+
+input[type=text]:focus, input[type=button]:focus, select:focus {
+  outline-color: rgb(100, 100, 150);
+  outline-style: solid;
+  outline-width: 1px;
 }
 
 listelem:active {
