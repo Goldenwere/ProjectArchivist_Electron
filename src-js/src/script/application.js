@@ -6,6 +6,23 @@ const ListElementChildTags = {
   close: "</listelem>"
 }
 
+const PageSounds = {
+  UI_Click: new Audio('media/click.wav', {
+    autoplay: false,
+    loop: false
+  }),
+
+  UI_Success: new Audio('media/success.wav', {
+    autoplay: false,
+    loop: false
+  }),
+
+  UI_Error: new Audio('media/error.wav', {
+    autoplay: false,
+    loop: false
+  })
+}
+
 let mainPage, itemPage, exclPage, errWinDesc, errWinAddl;
 let items, workingExclusions, workingRecursives, workingIndexItem, workingIndexExcl;
 
@@ -35,11 +52,23 @@ $(document).ready(function() {
 function handleWindowButtons() {
   $("#Button_Archiving_CreateScript").click(function() {
     if (validateMainFields()) {
-      writeScript(items, $("#Field_FileSettings_SavePath").val());
+      writeScript(items, $("#Field_FileSettings_SavePath").val(), function(err) {
+        if (err) {
+          PageSounds.UI_Error.play();
+          $("#Window_Error").removeClass("error-window-hidden");
+          $("#Window_Error_Overlay").removeClass("error-window-hidden");
+          errWinDesc.html("Error writing file");
+          errWinAddl.html(err);
+        }
+
+        else
+          PageSounds.UI_Success.play();
+      });
     }
   });
 
   $("#Button_ListItems_Add").click(function() {
+    PageSounds.UI_Click.play();
     switchToFromItemPage();
     fillItemFields(false);
     workingIndexItem = items.length;
@@ -52,6 +81,7 @@ function handleWindowButtons() {
 
   $("#Button_ListItems_Edit").click(function() {
     if (items.length > 0) {
+      PageSounds.UI_Click.play();
       switchToFromItemPage();
       fillItemFields(true);
 
@@ -64,6 +94,7 @@ function handleWindowButtons() {
 
   $("#Button_ListItems_Remove").click(function() {
     if (items.length > 0) {
+      PageSounds.UI_Click.play();
       items.splice(workingIndexItem, 1);
       $("#List_ListItems_ArchivedItems").children()[workingIndexItem].remove();
       if (items.length <= workingIndexItem)
@@ -81,17 +112,20 @@ function handleWindowButtons() {
     switchToFromExclPage();
     fillExclusionFields(false);
     workingIndexExcl = workingExclusions.length;
+    PageSounds.UI_Click.play();
   });
 
   $("#Button_Exclusions_Edit").click(function() {
     if (workingExclusions.length > 0) {
       switchToFromExclPage();
       fillExclusionFields(true);
+      PageSounds.UI_Click.play();
     }
   });
 
   $("#Button_Exclusions_Remove").click(function() {
     if (workingExclusions.length > 0) {
+      PageSounds.UI_Click.play();
       workingExclusions.splice(workingIndexExcl, 1);
       $("#List_Exclusions_Items").children()[workingIndexExcl].remove();
       if (workingExclusions.length <= workingIndexExcl)
@@ -109,6 +143,7 @@ function handleWindowButtons() {
     if (validateItemFields()) {
       $("#Button_ListItems_Edit").prop("disabled", false);
       $("#Button_ListItems_Remove").prop("disabled", false);
+      PageSounds.UI_Click.play();
 
       if (items.length > workingIndexItem) {
         items[workingIndexItem].itemName = $("#Field_ItemSettings_ItemName").val();
@@ -149,14 +184,19 @@ function handleWindowButtons() {
 
       switchToFromItemPage();
     }
+
+    else
+      PageSounds.UI_Error.play();
   });
 
   $("#Button_AddItem_NoSaveExit").click(function() {
     switchToFromItemPage();
+    PageSounds.UI_Click.play();
   });
 
   $("#Button_AddExcl_SaveExit").click(function() {
     if (validateExclusionFields()) {
+      PageSounds.UI_Click.play();
       $("#Button_Exclusions_Edit").prop("disabled", false);
       $("#Button_Exclusions_Remove").prop("disabled", false);
 
@@ -180,15 +220,20 @@ function handleWindowButtons() {
 
       switchToFromExclPage();
     }
+
+    else
+      PageSounds.UI_Error.play();
   });
 
   $("#Button_AddExcl_NoSaveExit").click(function() {
     switchToFromExclPage();
+    PageSounds.UI_Click.play();
   });
 
   $("#Button_GlobalControls_ApplyGlobals").click(function() {
     let duplicates = validateGlobalFields();
-    if (duplicates.length == 0) {
+    if (duplicates.length <= 0) {
+      PageSounds.UI_Click.play();
       for (let i = 0; i < items.length; i++) {
         items[i].password = $("#Field_GlobalControls_Password").val();
         items[i].type = $("#Dropdown_GlobalControls_FileType").val();
@@ -199,6 +244,7 @@ function handleWindowButtons() {
     }
 
     else {
+      PageSounds.UI_Error.play();
       $("#Window_Error").removeClass("error-window-hidden");
       $("#Window_Error_Overlay").removeClass("error-window-hidden");
       errWinDesc.html("There are items that have the same file name that applying a global destination path would create invalid items. Either change the file names for these items or change the destination path");

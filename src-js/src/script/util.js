@@ -30,7 +30,7 @@ const TYPE_PPMD = "-m0=PPMd";
 /*
 ** Creates a batch script based on incoming items to the provided destination using Node.js File System module
 */
-function writeScript(items, destination) {
+function writeScript(items, destination, callback = function(err) { if (err) throw err; }) {
   let out = MSG_BEGIN;
 
   items.forEach(item => {
@@ -76,7 +76,5 @@ function writeScript(items, destination) {
     out += QUOTE + item.sourcePath + ASTERISK + QUOTE + NEWLINE;
   });
 
-  fs.writeFile(destination, out, function (err) {
-    if (err) throw err;
-  });
+  fs.writeFile(destination, out, callback);
 }
