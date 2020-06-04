@@ -49,19 +49,26 @@ function handleWindowButtons() {
   });
 
   $("#Button_ListItems_Edit").click(function() {
-    switchToFromItemPage();
-    fillItemFields(true);
+    if (items.length > 0) {
+      switchToFromItemPage();
+      fillItemFields(true);
 
-    // Editing items mean that the working exclusions set needs reset
-    workingIndexExcl = 0;
-    workingExclusions = items[workingIndexItem].exclusions;
-    workingRecursives = items[workingIndexItem].exclusionsRecursives;
+      // Editing items mean that the working exclusions set needs reset
+      workingIndexExcl = 0;
+      workingExclusions = items[workingIndexItem].exclusions;
+      workingRecursives = items[workingIndexItem].exclusionsRecursives;
+    }
   });
 
   $("#Button_ListItems_Remove").click(function() {
-    items.splice(workingIndexItem, 1);
-    $("#List_ListItems_ArchivedItems").children()[workingIndexItem].remove();
-    workingIndexItem--;
+    if (items.length > 0) {
+      items.splice(workingIndexItem, 1);
+      $("#List_ListItems_ArchivedItems").children()[workingIndexItem].remove();
+      if (items.length <= workingIndexItem)
+        workingIndexItem--;
+      if (items.length > 0)
+        $("#List_ListItems_ArchivedItems").children()[workingIndexItem].classList.add("selected");
+    }
   });
 
   $("#Button_Exclusions_Add").click(function() {
@@ -71,14 +78,21 @@ function handleWindowButtons() {
   });
 
   $("#Button_Exclusions_Edit").click(function() {
-    switchToFromExclPage();
-    fillExclusionFields(true);
+    if (workingExclusions.length > 0) {
+      switchToFromExclPage();
+      fillExclusionFields(true);
+    }
   });
 
   $("#Button_Exclusions_Remove").click(function() {
-    workingExclusions.splice(workingIndexExcl, 1);
-    $("#List_Exclusions_Items").children()[workingIndexExcl].remove();
-    workingIndexExcl--;
+    if (workingExclusions.length > 0) {
+      workingExclusions.splice(workingIndexExcl, 1);
+      $("#List_Exclusions_Items").children()[workingIndexExcl].remove();
+      if (workingExclusions.length <= workingIndexExcl)
+        workingIndexExcl--;
+      if (workingExclusions.length > 0)
+        $("#List_Exclusions_Items").children()[workingIndexExcl].classList.add("selected");
+    }
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
@@ -117,6 +131,7 @@ function handleWindowButtons() {
         $("#List_ListItems_ArchivedItems").append(elem);
         handleListsChildren(elem, false);
         $("#List_ListItems_ArchivedItems").children().removeClass("selected");
+        elem.addClass("selected");
       }
 
       switchToFromItemPage();
@@ -144,8 +159,8 @@ function handleWindowButtons() {
         $("#List_Exclusions_Items").append(elem);
         handleListsChildren(elem, true);
         $("#List_Exclusions_Items").children().removeClass("selected");
+        elem.addClass("selected");
       }
-
 
       switchToFromExclPage();
     }
