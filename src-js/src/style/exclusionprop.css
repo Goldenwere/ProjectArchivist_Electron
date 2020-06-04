@@ -1,27 +1,27 @@
-#Section_AddItem_ItemSettings {
+#Section_AddExcl_ExclSettings {
   flex: 1 1 60%;
 }
 
-#Section_AddItem_ItemSettings * {
+#Section_AddExcl_ExclSettings * {
   padding-bottom: 0.5em;
 }
 
-#Section_AddItem_ItemSettings control label {
+#Section_AddExcl_ExclSettings control label {
   display: inline-block;
     width: 40%;
 }
 
-#Control_ItemSettings_Exclusion input {
+#Control_ExclSettings_Exclusion input {
   width: 55%;
 }
 
-#Section_AddItem_ExitButtons {
+#Section_AddExcl_ExitButtons {
   flex: 0 0 30%;
   padding: 0 0.5em;
   margin-top: -0.1em;
 }
 
-#Section_AddItem_ExitButtons control input {
+#Section_AddExcl_ExitButtons control input {
   width: 100%;
   height: 3.5em;
 }
