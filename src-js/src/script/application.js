@@ -65,6 +65,9 @@ function handleWindowButtons() {
           PageSounds.UI_Success.play();
       });
     }
+
+    else
+      PageSounds.UI_Error.play();
   });
 
   $("#Button_ListItems_Add").click(function() {
@@ -144,6 +147,7 @@ function handleWindowButtons() {
       $("#Button_ListItems_Edit").prop("disabled", false);
       $("#Button_ListItems_Remove").prop("disabled", false);
       PageSounds.UI_Click.play();
+      $("#List_ListItems_ArchivedItems").removeClass("invalid-item");
 
       if (items.length > workingIndexItem) {
         items[workingIndexItem].itemName = $("#Field_ItemSettings_ItemName").val();

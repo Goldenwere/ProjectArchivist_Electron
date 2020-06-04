@@ -1,4 +1,10 @@
+#Group_ItemSettings {
+  width: 100%;
+  height: auto;
+}
+
 #Section_AddExcl_ExclSettings {
+  margin-top: 2rem;
   flex: 1 1 60%;
 }
 
