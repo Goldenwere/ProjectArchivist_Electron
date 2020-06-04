@@ -348,12 +348,15 @@ function validateItemFields() {
 
     else {
       let invalidMessages = [];
-      for (let i = 0; i < items.length; i++) {
-        if (itemName.value == items[i].itemName)
-          invalidMessages.push("Item name already exists");
 
-        if (items[i].destinationPath == itemDest.value && items[i].fileName == itemFile.value)
-          invalidMessages.push("Item has same destination path and file name as " + items[i].itemName);
+      for (let i = 0; i < items.length; i++) {
+        if (i != workingIndexItem) {
+          if (itemName.value == items[i].itemName)
+            invalidMessages.push("Item name already exists");
+
+          if (items[i].destinationPath == itemDest.value && items[i].fileName == itemFile.value)
+            invalidMessages.push("Item has same destination path and file name as " + items[i].itemName);
+        }
       }
 
       if (invalidMessages.length > 0) {
