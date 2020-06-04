@@ -1,5 +1,6 @@
 window.$ = window.jQuery = require('jquery');
 Electron = require('electron');
+tippy = require('tippy.js').default;
 
 const ListElementChildTags = {
   start: "<listelem>",
@@ -43,6 +44,7 @@ $(document).ready(function() {
 
   handleWindowButtons();
   handleItemEditorFields();
+  handleTooltips();
 });
 
 /*
@@ -289,6 +291,161 @@ function handleListsChildren(child, isExclusion) {
       workingIndexExcl = child.parent().children().index(child);
     else
       workingIndexItem = child.parent().children().index(child);
+  });
+}
+
+/*
+** Setup function - tooltips for all inputs in all windows
+*/
+function handleTooltips() {
+  tippy('#Control_FileSettings_SavePath', {
+    content: "Click here to define where to save the script to and its file name",
+    arrow: true
+  });
+
+  tippy('#Control_ListItems_ArchivedItems', {
+    content: "This is where archived items appear. To select one for editing/removal, click on it",
+    arrow: true
+  });
+
+  tippy('#Control_ListItems_Add', {
+    content: "Switches to the item window to add an archived item to the list",
+    arrow: true
+  });
+
+  tippy('#Control_ListItems_Edit', {
+    content: "Switches to the item window to edit a selected archived item",
+    arrow: true
+  });
+
+  tippy('#Control_ListItems_Remove', {
+    content: "Removes the currently selected archived item from the list",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_Password', {
+    content: "Sets the default password for new items",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_FileType', {
+    content: "Sets the default file type for new items",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_CompressionLevel', {
+    content: "Sets the default compression level for new items",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_CompressionMethod', {
+    content: "Sets the default compression method for new items",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_Destination', {
+    content: "Sets the default destination path (excludes file name) for new items",
+    arrow: true
+  });
+
+  tippy('#Control_GlobalControls_ApplyGlobals', {
+    content: "Applies whatever is currently set in the above settings to any existing items",
+    arrow: true
+  });
+
+  tippy('#Control_Archiving_CreateScript', {
+    content: "Saves all defined archive items to the batch script defined at the top of the window",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_ItemName', {
+    content: "Sets the item's name. This has no effect on what is archived, but is used for terminal feedback and keeping track of items in this editor",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_Source', {
+    content: "Sets the item's source path. Make sure this is a directory, as its contents will be what is added to the archive",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_Destination', {
+    content: "Sets the item's destination path. This does not include the output file's name",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_FileName', {
+    content: "Sets the item's file name. This does not need to include the extension, as this is determined by the file type setting",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_Password', {
+    content: "(Optional) Sets the password for the item. Leave this field blank (or delete its contents) if you do not want the item to be password protected",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_FileType', {
+    content: "Sets the file type/extension for the item",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_CompressionLevel', {
+    content: "Sets the level of compression for the item. 0 means no compression, 9 is the highest compression level",
+    arrow: true
+  });
+
+  tippy('#Control_ItemSettings_CompressionMethod', {
+    content: "Sets the compression method for the item",
+    arrow: true
+  });
+
+  tippy('#Control_Exclusions_Items', {
+    content: "This is where exclusions appear. To select one for editing/removal, click on it",
+    arrow: true
+  });
+
+  tippy('#Control_Exclusions_Add', {
+    content: "Switches to the exclusion window to add an exclusion to the list",
+    arrow: true
+  });
+
+  tippy('#Control_Exclusions_Edit', {
+    content: "Switches to the exclusion window to edit a selected exclusion",
+    arrow: true
+  });
+
+  tippy('#Control_Exclusions_Remove', {
+    content: "Removes the currently selected exclusion from the list",
+    arrow: true
+  });
+
+  tippy('#Control_AddItem_SaveExit', {
+    content: "Saves the item and switches back to the main window",
+    arrow: true
+  });
+
+  tippy('#Control_AddItem_NoSaveExit', {
+    content: "Switches back to the main window without saving the item",
+    arrow: true
+  });
+
+  tippy('#Control_ExclSettings_Exclusion', {
+    content: "The thing that is being excluded. Uses 7-Zip-defined wildcards, where \n\t'*.txt' would target all files with the .txt extension, \n\t'?a*' would target all files with a second character of 'a', \n\t'*1*' would target all files containing the character '1', \n\t'*.*.*' would target all files that contain two at least '.' characters",
+    arrow: true
+  });
+
+  tippy('#Control_ExclSettings_Recursive', {
+    content: "Whether this exclusion is recursive. Without recursion, the exclusion will only work at the top level of the source. With recursion, any instance of the exclusion will be excluded",
+    arrow: true
+  });
+
+  tippy('#Control_AddExcl_SaveExit', {
+    content: "Saves the exclusion and switches back to the item window",
+    arrow: true
+  });
+
+  tippy('#Control_AddExcl_NoSaveExit', {
+    content: "Switches back to the item window without saving the exclusion",
+    arrow: true
   });
 }
 

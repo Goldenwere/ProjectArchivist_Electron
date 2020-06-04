@@ -98,3 +98,26 @@ input:invalid, .invalid-item {
 input:disabled {
   opacity: 0.5;
 }
+
+.tippy-box {
+  color: rgb(220, 220, 220);
+  background-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="top"] > .tippy-arrow:before {
+  border-top-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+  border-bottom-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="left"] > .tippy-arrow:before {
+  border-left-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="right"] > .tippy-arrow:before {
+  border-right-color: rgb(80, 80, 80);
+}
+.tippy-box > .tippy-backdrop {
+  background-color: rgb(80, 80, 80);
+}
+.tippy-box > .tippy-svg-arrow {
+  fill: rgb(80, 80, 80);
+}
