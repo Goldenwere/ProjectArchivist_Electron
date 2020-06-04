@@ -298,13 +298,13 @@ function handleListsChildren(child, isExclusion) {
 */
 function updateTextWithFileDialog(elem, isFolder = false) {
   if (isFolder) {
-    elem.dblclick(function() {
+    elem.click(function() {
       Electron.remote.dialog.showOpenDialog({ properties: [ 'openDirectory' ] }).then((data) => { elem.val(data.filePaths[0]); });
     });
   }
 
   else {
-    elem.dblclick(function() {
+    elem.click(function() {
       Electron.remote.dialog.showOpenDialog({ filters: [ { name: 'Batch Scripts', extensions: [ 'bat' ] } ], properties: [ 'promptToCreate' ] }).then((data) => { elem.val(data.filePaths[0]); });
     });
   }
