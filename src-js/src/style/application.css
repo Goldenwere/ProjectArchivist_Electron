@@ -11,14 +11,15 @@ page {
   height: 100vh;
   transform: translateX(100%);
   opacity: 0;
+  visibility: hidden;
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0,1,1,1);
   transition-duration: 0.5s;
 }
 
 .current-page {
-  display: inline-block;
   position: absolute;
+  visibility: visible;
   top: 0;
   left: 0;
   width: 100vw;
