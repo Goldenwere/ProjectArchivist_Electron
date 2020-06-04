@@ -26,7 +26,7 @@ groupbox h1 {
 }
 
 input:focus, input:hover, input:active, listelem:hover, listelem:active {
-  transition-property: background-color, color;
+  transition-property: background-color, color, opacity;
   transition-timing-function: cubic-bezier(0,1,1,1);
   transition-duration: 0.5s;
 }
@@ -87,4 +87,8 @@ input:invalid, .invalid-item {
 .error-window {
   border-color: orange;
   background-color: rgb(20, 20, 20);
+}
+
+input:disabled {
+  opacity: 0.5;
 }

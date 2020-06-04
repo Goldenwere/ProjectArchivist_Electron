@@ -21,6 +21,8 @@ $(document).ready(function() {
   workingIndexItem = 0;
   workingIndexExcl = 0;
   items = [];
+  $("#Button_ListItems_Edit").prop("disabled", true);
+  $("#Button_ListItems_Remove").prop("disabled", true);
 
   handleWindowButtons();
   handleItemEditorFields();
@@ -68,6 +70,10 @@ function handleWindowButtons() {
         workingIndexItem--;
       if (items.length > 0)
         $("#List_ListItems_ArchivedItems").children()[workingIndexItem].classList.add("selected");
+      else {
+        $("#Button_ListItems_Edit").prop("disabled", true);
+        $("#Button_ListItems_Remove").prop("disabled", true);
+      }
     }
   });
 
@@ -92,11 +98,18 @@ function handleWindowButtons() {
         workingIndexExcl--;
       if (workingExclusions.length > 0)
         $("#List_Exclusions_Items").children()[workingIndexExcl].classList.add("selected");
+      else {
+        $("#Button_Exclusions_Edit").prop("disabled", true);
+        $("#Button_Exclusions_Remove").prop("disabled", true);
+      }
     }
   });
 
   $("#Button_AddItem_SaveExit").click(function() {
     if (validateItemFields()) {
+      $("#Button_ListItems_Edit").prop("disabled", false);
+      $("#Button_ListItems_Remove").prop("disabled", false);
+
       if (items.length > workingIndexItem) {
         items[workingIndexItem].itemName = $("#Field_ItemSettings_ItemName").val();
         items[workingIndexItem].sourcePath = $("#Field_ItemSettings_Source").val();
@@ -144,6 +157,9 @@ function handleWindowButtons() {
 
   $("#Button_AddExcl_SaveExit").click(function() {
     if (validateExclusionFields()) {
+      $("#Button_Exclusions_Edit").prop("disabled", false);
+      $("#Button_Exclusions_Remove").prop("disabled", false);
+
       if (workingExclusions.length > workingIndexExcl) {
         workingExclusions[workingIndexExcl] = $("#Field_ExclSettings_ExclName").val();
         workingRecursives[workingIndexExcl] = $("#Checkbox_ExclSettings_Recursive").prop("checked");
@@ -289,11 +305,20 @@ function fillItemFields(isEdit = false) {
     $("#Dropdown_ItemSettings_CompressionLevel").val(items[workingIndexItem].compressionLevel);
     $("#Dropdown_ItemSettings_CompressionMethod").val(items[workingIndexItem].compressionMethod);
 
-    items[workingIndexItem].exclusions.forEach(e => {
-      let elem = $(ListElementChildTags.start + e + ListElementChildTags.close);
-      $("#List_Exclusions_Items").append(elem);
-      handleListsChildren(elem, true);
-    });
+    if (items[workingIndexItem].exclusions.length <= 0) {
+      $("#Button_Exclusions_Edit").prop("disabled", true);
+      $("#Button_Exclusions_Remove").prop("disabled", true);
+    }
+
+    else {
+      $("#Button_Exclusions_Edit").prop("disabled", false);
+      $("#Button_Exclusions_Remove").prop("disabled", false);
+      items[workingIndexItem].exclusions.forEach(e => {
+        let elem = $(ListElementChildTags.start + e + ListElementChildTags.close);
+        $("#List_Exclusions_Items").append(elem);
+        handleListsChildren(elem, true);
+      });
+    }
   }
 
   else {
@@ -305,6 +330,8 @@ function fillItemFields(isEdit = false) {
     $("#Dropdown_ItemSettings_FileType").val($("#Dropdown_GlobalControls_FileType").val());
     $("#Dropdown_ItemSettings_CompressionLevel").val($("#Dropdown_GlobalControls_CompressionLevel").val());
     $("#Dropdown_ItemSettings_CompressionMethod").val($("#Dropdown_GlobalControls_CompressionMethod").val());
+    $("#Button_Exclusions_Edit").prop("disabled", true);
+    $("#Button_Exclusions_Remove").prop("disabled", true);
   }
 }
 
