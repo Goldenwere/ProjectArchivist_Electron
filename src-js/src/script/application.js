@@ -422,8 +422,27 @@ function validateExclusionFields() {
     clone.classList.add("invalid-item");
   }
 
-  else
-    exclName.classList.remove("invalid-item");
+  else {
+    let invalidMessages = [];
+    for (let i = 0; i < workingExclusions.length; i++) {
+      if (i != workingIndexExcl && exclName.value == workingExclusions[i])
+        invalidMessages.push("Exclusion already exists");
+    }
+
+    if (invalidMessages.length > 0) {
+      valid = false;
+      $("#Window_Error").removeClass("error-window-hidden");
+      $("#Window_Error_Overlay").removeClass("error-window-hidden");
+      errWinDesc.html("Exclusion has conflicts with existing exclusions");
+      let inner = "";
+      for (let i = 0; i < invalidMessages.length; i++)
+        inner += invalidMessages[i] + "<br/>";
+      errWinAddl.html(inner);
+    }
+
+    else
+      exclName.classList.remove("invalid-item");
+  }
 
   return valid;
 }
