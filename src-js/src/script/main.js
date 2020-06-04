@@ -6,12 +6,13 @@ app.on('ready', () => {
     backgroundColor: "#141414",
     width: 800,
     height: 600,
+    icon: __dirname + '/../media/icon.png',
     webPreferences: {
       webSecurity: true,
       nodeIntegration: true
     }
   });
-  //mainWindow.webContents.toggleDevTools();
+
   const indexPath = path.resolve(__dirname, '../index.html')
   mainWindow.loadFile(indexPath);
 })
