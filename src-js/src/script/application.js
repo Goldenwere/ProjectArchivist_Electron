@@ -3,45 +3,51 @@ Electron = require('electron');
 tippy = require('tippy.js').default;
 
 const TooltipArrow = true;
-const TooltipPlacement = 'bottom-end';
+const TooltipAnimation = 'shift-away';
+const TooltipPlacement = {
+  // For controls that contain both a label and an input
+  Field: 'bottom-end',
+  // For controls that are either full-width or single elements (e.g. buttons)
+  Element: 'bottom'
+};
 const TooltipContent = {
   // File Settings / Other
-  Control_FileSettings_SavePath: "Click here to define where to save the script to and its file name",
-  Control_Archiving_CreateScript: "Saves all defined archive items to the batch script defined at the top of the window",
+  C_FS_SavePath: "Click here to define where to save the script to and its file name",
+  C_A_CreateScript: "Saves all defined archive items to the batch script defined at the top of the window",
   // Archive items list
-  Control_ListItems_ArchivedItems: "This is where archived items appear. To select one for editing/removal, click on it",
-  Control_ListItems_Add: "Switches to the item window to add an archived item to the list",
-  Control_ListItems_Edit: "Switches to the item window to edit a selected archived item",
-  Control_ListItems_Remove: "Removes the currently selected archived item from the list",
+  C_LI_ArchivedItems: "This is where archived items appear. To select one for editing/removal, click on it",
+  C_LI_Add: "Switches to the item window to add an archived item to the list",
+  C_LI_Edit: "Switches to the item window to edit a selected archived item",
+  C_LI_Remove: "Removes the currently selected archived item from the list",
   // Globals
-  Control_GlobalControls_Password: "Sets the default password for new items",
-  Control_GlobalControls_FileType: "Sets the default file type for new items",
-  Control_GlobalControls_CompressionLevel: "Sets the default compression level for new items",
-  Control_GlobalControls_CompressionMethod: "Sets the default compression method for new items",
-  Control_GlobalControls_Destination: "Sets the default destination path (excludes file name) for new items",
-  Control_GlobalControls_ApplyGlobals: "Applies whatever is currently set in the above settings to any existing items",
+  C_GC_Password: "Sets the default password for new items",
+  C_GC_FileType: "Sets the default file type for new items",
+  C_GC_CompressionLevel: "Sets the default compression level for new items",
+  C_GC_CompressionMethod: "Sets the default compression method for new items",
+  C_GC_Destination: "Sets the default destination path (excludes file name) for new items",
+  C_GC_ApplyGlobals: "Applies whatever is currently set in the above settings to any existing items",
   // Item editor
-  Control_ItemSettings_ItemName: "Sets the item's name. This has no effect on what is archived, but is used for terminal feedback and keeping track of items in this editor",
-  Control_ItemSettings_Source: "Sets the item's source path. Make sure this is a directory, as its contents will be what is added to the archive",
-  Control_ItemSettings_Destination: "Sets the item's destination path. This does not include the output file's name",
-  Control_ItemSettings_FileName: "Sets the item's file name. This does not need to include the extension, as this is determined by the file type setting",
-  Control_ItemSettings_Password: "(Optional) Sets the password for the item. Leave this field blank (or delete its contents) if you do not want the item to be password protected",
-  Control_ItemSettings_FileType: "Sets the file type/extension for the item",
-  Control_ItemSettings_CompressionLevel: "Sets the level of compression for the item. 0 means no compression, 9 is the highest compression level",
-  Control_ItemSettings_CompressionMethod: "Sets the compression method for the item",
+  C_IS_ItemName: "Sets the item's name. This has no effect on what is archived, but is used for terminal feedback and keeping track of items in this editor",
+  C_IS_Source: "Sets the item's source path. Make sure this is a directory, as its contents will be what is added to the archive",
+  C_IS_Destination: "Sets the item's destination path. This does not include the output file's name",
+  C_IS_FileName: "Sets the item's file name. This does not need to include the extension, as this is determined by the file type setting",
+  C_IS_Password: "(Optional) Sets the password for the item. Leave this field blank (or delete its contents) if you do not want the item to be password protected",
+  C_IS_FileType: "Sets the file type/extension for the item",
+  C_IS_CompressionLevel: "Sets the level of compression for the item. 0 means no compression, 9 is the highest compression level",
+  C_IS_CompressionMethod: "Sets the compression method for the item",
   // Item editor exclusion list
-  Control_Exclusions_Items: "This is where exclusions appear. To select one for editing/removal, click on it",
-  Control_Exclusions_Add: "Switches to the exclusion window to add an exclusion to the list",
-  Control_Exclusions_Edit: "Switches to the exclusion window to edit a selected exclusion",
-  Control_Exclusions_Remove: "Removes the currently selected exclusion from the list",
+  C_E_Items: "This is where exclusions appear. To select one for editing/removal, click on it",
+  C_E_Add: "Switches to the exclusion window to add an exclusion to the list",
+  C_E_Edit: "Switches to the exclusion window to edit a selected exclusion",
+  C_E_Remove: "Removes the currently selected exclusion from the list",
   // Item editor exit buttons
-  Control_AddItem_SaveExit: "Saves the item and switches back to the main window",
-  Control_AddItem_NoSaveExit: "Switches back to the main window without saving the item",
+  C_AI_SaveExit: "Saves the item and switches back to the main window",
+  C_AI_NoSaveExit: "Switches back to the main window without saving the item",
   // Exclusion editor
-  Control_ExclSettings_Exclusion: "The thing that is being excluded. Uses 7-Zip-defined wildcards, where \n\t'*.txt' would target all files with the .txt extension, \n\t'?a*' would target all files with a second character of 'a', \n\t'*1*' would target all files containing the character '1', \n\t'*.*.*' would target all files that contain two at least '.' characters",
-  Control_ExclSettings_Recursive: "Whether this exclusion is recursive. Without recursion, the exclusion will only work at the top level of the source. With recursion, any instance of the exclusion will be excluded",
-  Control_AddExcl_SaveExit: "Saves the exclusion and switches back to the item window",
-  Control_AddExcl_NoSaveExit: "Switches back to the item window without saving the exclusion"
+  C_ES_Exclusion: "The thing that is being excluded. Uses 7-Zip-defined wildcards, where \n\t'*.txt' would target all files with the .txt extension, \n\t'?a*' would target all files with a second character of 'a', \n\t'*1*' would target all files containing the character '1', \n\t'*.*.*' would target all files that contain two at least '.' characters",
+  C_ES_Recursive: "Whether this exclusion is recursive. Without recursion, the exclusion will only work at the top level of the source. With recursion, any instance of the exclusion will be excluded",
+  C_AE_SaveExit: "Saves the exclusion and switches back to the item window",
+  C_AE_NoSaveExit: "Switches back to the item window without saving the exclusion"
 }
 
 const ListElementChildTags = {
@@ -341,42 +347,42 @@ function handleListsChildren(child, isExclusion) {
 */
 function handleTooltips() {
   // File Settings / Other
-  tippy('#Control_FileSettings_SavePath', { content: TooltipContent.Control_FileSettings_SavePath, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_Archiving_CreateScript', { content: TooltipContent.Control_Archiving_CreateScript, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_FileSettings_SavePath', { content: TooltipContent.C_FS_SavePath, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_Archiving_CreateScript', { content: TooltipContent.C_A_CreateScript, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
   // Archive items list
-  tippy('#Control_ListItems_ArchivedItems', { content: TooltipContent.Control_ListItems_ArchivedItems, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ListItems_Add', { content: TooltipContent.Control_ListItems_Add, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ListItems_Edit', { content: TooltipContent.Control_ListItems_Edit, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ListItems_Remove', { content: TooltipContent.Control_ListItems_Remove, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_ListItems_ArchivedItems', { content: TooltipContent.C_LI_ArchivedItems, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_ListItems_Add', { content: TooltipContent.C_LI_Add, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_ListItems_Edit', { content: TooltipContent.C_LI_Edit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_ListItems_Remove', { content: TooltipContent.C_LI_Remove, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
   // Globals
-  tippy('#Control_GlobalControls_Password', { content: TooltipContent.Control_GlobalControls_Password, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_GlobalControls_FileType', { content: TooltipContent.Control_GlobalControls_FileType, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_GlobalControls_CompressionLevel', { content: TooltipContent.Control_GlobalControls_CompressionLevel, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_GlobalControls_CompressionMethod', { content: TooltipContent.Control_GlobalControls_CompressionMethod, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_GlobalControls_Destination', { content: TooltipContent.Control_GlobalControls_Destination, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_GlobalControls_ApplyGlobals', { content: TooltipContent.Control_GlobalControls_ApplyGlobals, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_GlobalControls_Password', { content: TooltipContent.C_GC_Password, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_GlobalControls_FileType', { content: TooltipContent.C_GC_FileType, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_GlobalControls_CompressionLevel', { content: TooltipContent.C_GC_CompressionLevel, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_GlobalControls_CompressionMethod', { content: TooltipContent.C_GC_CompressionMethod, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_GlobalControls_Destination', { content: TooltipContent.C_GC_Destination, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_GlobalControls_ApplyGlobals', { content: TooltipContent.C_GC_ApplyGlobals, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
   // Item editor
-  tippy('#Control_ItemSettings_ItemName', { content: TooltipContent.Control_ItemSettings_ItemName, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_Source', { content: TooltipContent.Control_ItemSettings_Source, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_Destination', { content: TooltipContent.Control_ItemSettings_Destination, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_FileName', { content: TooltipContent.Control_ItemSettings_FileName, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_Password', { content: TooltipContent.Control_ItemSettings_Password, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_FileType', { content: TooltipContent.Control_ItemSettings_FileType, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_CompressionLevel', { content: TooltipContent.Control_ItemSettings_CompressionLevel, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ItemSettings_CompressionMethod', { content: TooltipContent.Control_ItemSettings_CompressionMethod, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_ItemSettings_ItemName', { content: TooltipContent.C_IS_ItemName, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_Source', { content: TooltipContent.C_IS_Source, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_Destination', { content: TooltipContent.C_IS_Destination, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_FileName', { content: TooltipContent.C_IS_FileName, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_Password', { content: TooltipContent.C_IS_Password, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_FileType', { content: TooltipContent.C_IS_FileType, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_CompressionLevel', { content: TooltipContent.C_IS_CompressionLevel, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
+  tippy('#Control_ItemSettings_CompressionMethod', { content: TooltipContent.C_IS_CompressionMethod, arrow: TooltipArrow, placement: TooltipPlacement.Field, animation: TooltipAnimation });
   // Item editor exclusion list
-  tippy('#Control_Exclusions_Items', { content: TooltipContent.Control_Exclusions_Items, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_Exclusions_Add', { content: TooltipContent.Control_Exclusions_Add, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_Exclusions_Edit', { content: TooltipContent.Control_Exclusions_Edit, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_Exclusions_Remove', { content: TooltipContent.Control_Exclusions_Remove, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_Exclusions_Items', { content: TooltipContent.C_E_Items, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_Exclusions_Add', { content: TooltipContent.C_E_Add, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_Exclusions_Edit', { content: TooltipContent.C_E_Edit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_Exclusions_Remove', { content: TooltipContent.C_E_Remove, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
   // Item editor exit buttons
-  tippy('#Control_AddItem_SaveExit', { content: TooltipContent.Control_AddItem_SaveExit, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_AddItem_NoSaveExit', { content: TooltipContent.Control_AddItem_NoSaveExit, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_AddItem_SaveExit', { content: TooltipContent.C_AI_SaveExit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_AddItem_NoSaveExit', { content: TooltipContent.C_AI_NoSaveExit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
   // Exclusion editor
-  tippy('#Control_ExclSettings_Exclusion', { content: TooltipContent.Control_ExclSettings_Exclusion, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_ExclSettings_Recursive', { content: TooltipContent.Control_ExclSettings_Recursive, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_AddExcl_SaveExit', { content: TooltipContent.Control_AddExcl_SaveExit, arrow: TooltipArrow, placement: TooltipPlacement });
-  tippy('#Control_AddExcl_NoSaveExit', { content: TooltipContent.Control_AddExcl_NoSaveExit, arrow: TooltipArrow, placement: TooltipPlacement });
+  tippy('#Control_ExclSettings_Exclusion', { content: TooltipContent.C_ES_Exclusion, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_ExclSettings_Recursive', { content: TooltipContent.C_ES_Recursive, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_AddExcl_SaveExit', { content: TooltipContent.C_AE_SaveExit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
+  tippy('#Control_AddExcl_NoSaveExit', { content: TooltipContent.C_AE_NoSaveExit, arrow: TooltipArrow, placement: TooltipPlacement.Element, animation: TooltipAnimation });
 }
 
 /*
