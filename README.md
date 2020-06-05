@@ -10,22 +10,6 @@ Project Archivist stems from the code written for a [Windows Form application of
 
 ## Roadmap
 
-The application currently **does not yet function**.
-
-### Completed
-
-- Main window appearance
-- Item window appearance
-- Exclusion window appearance
-- Add/Edit/Close buttons switch pages
-- Exclusion add/remove/edit functionality
-- Item add/remove/edit functionality
-
-### Up next for 1.0.0
-
-- File I/O
-- Error-case handling
-
 ### Up next for 1.1.0
 
 - XML file creation
