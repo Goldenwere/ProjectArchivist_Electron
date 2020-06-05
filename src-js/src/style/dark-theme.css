@@ -25,13 +25,13 @@ groupbox h1 {
   font-size: 1.25em;
 }
 
-input:focus, input:hover, input:active, listelem:hover, listelem:active {
-  transition-property: background-color, color;
+input:focus, input:hover, input:active, listelem:hover, listelem:active, select:focus, select:hover {
+  transition-property: background-color, color, opacity, outline;
   transition-timing-function: cubic-bezier(0,1,1,1);
   transition-duration: 0.5s;
 }
 
-listbox, input[type=text], input[type=number], select, input[type=button] {
+listbox, input[type=text], input[type=button], select {
   background-color: rgb(50, 50, 50);
   color: rgb(220, 220, 220);
   border-color: rgb(100, 100, 100);
@@ -43,6 +43,12 @@ listbox, input[type=text], input[type=number], select, input[type=button] {
 
 input[type=button]:hover, listelem:hover, input[type="checkbox"]:hover {
   background-color: rgb(60, 60, 100);
+}
+
+input[type=text]:focus, input[type=button]:focus, select:focus {
+  outline-color: rgb(100, 100, 150);
+  outline-style: solid;
+  outline-width: 1px;
 }
 
 listelem:active {
@@ -82,4 +88,36 @@ input[type=checkbox]:checked:after {
 
 input:invalid, .invalid-item {
   background-color: rgba(255, 150, 20, 0.5) !important;
+}
+
+.error-window {
+  border-color: orange;
+  background-color: rgb(20, 20, 20);
+}
+
+input:disabled {
+  opacity: 0.5;
+}
+
+.tippy-box {
+  color: rgb(220, 220, 220);
+  background-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="top"] > .tippy-arrow:before {
+  border-top-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+  border-bottom-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="left"] > .tippy-arrow:before {
+  border-left-color: rgb(80, 80, 80);
+}
+.tippy-box[data-placement^="right"] > .tippy-arrow:before {
+  border-right-color: rgb(80, 80, 80);
+}
+.tippy-box > .tippy-backdrop {
+  background-color: rgb(80, 80, 80);
+}
+.tippy-box > .tippy-svg-arrow {
+  fill: rgb(80, 80, 80);
 }
