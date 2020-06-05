@@ -5,27 +5,27 @@ const MSG_BEGIN: string = "@echo off\n" +
   "echo This script was created with Project Archivist v1.0\n" +
   "echo Beginning archiving...";
 
-const MSG_CURRENT_PREFIX = "echo Archiving: ";
+const MSG_CURRENT_PREFIX: string = "echo Archiving: ";
 
-const CMD = "7z a";
-const SPACE = " ";
-const QUOTE = "\"";
-const NEWLINE = "\n"
+const CMD: string = "7z a";
+const SPACE: string = " ";
+const QUOTE: string = "\"";
+const NEWLINE: string = "\n";
 
-const PARAM_LEVEL = "-mx=";
-const PARAM_ENCRYPT = "-mhe";
-const PARAM_PASS = "-p";
-const PARAM_EXCLUDE = "-x!";
-const PARAM_EXCLUDE_RECURSIVE = "-xr!";
-const PARAM_TYPE = "-t";
+const PARAM_LEVEL: string = "-mx=";
+const PARAM_ENCRYPT: string = "-mhe";
+const PARAM_PASS: string = "-p";
+const PARAM_EXCLUDE: string = "-x!";
+const PARAM_EXCLUDE_RECURSIVE: string = "-xr!";
+const PARAM_TYPE: string = "-t";
 
-const EXTENSION_SEVENZIP = "7z";
-const EXTENSION_ZIP = "zip";
+const EXTENSION_SEVENZIP: string = "7z";
+const EXTENSION_ZIP: string = "zip";
 
-const TYPE_LZMA = "-m0=LZMA";
-const TYPE_LZMA2 = "-m0=LZMA2";
-const TYPE_BZIP2 = "-m0=BZip2";
-const TYPE_PPMD = "-m0=PPMd";
+const TYPE_LZMA: string = "-m0=LZMA";
+const TYPE_LZMA2: string = "-m0=LZMA2";
+const TYPE_BZIP2: string = "-m0=BZip2";
+const TYPE_PPMD: string = "-m0=PPMd";
 
 /*
 ** Creates a batch script based on incoming items to the provided destination using Node.js File System module

@@ -143,7 +143,7 @@ function handleWindowButtons() {
 
       else {
         workingExclusions.push(<string>$("#Field_ExclSettings_ExclName").val());
-        workingRecursives.push(<boolean><boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
+        workingRecursives.push(<boolean>$("#Checkbox_ExclSettings_Recursive").prop("checked"));
 
         let elem: JQuery<HTMLElement> = $(ListElementChildTags.start + <string>$("#Field_ExclSettings_ExclName").val() + ListElementChildTags.close);
         $("#List_Exclusions_Items").append(elem);
