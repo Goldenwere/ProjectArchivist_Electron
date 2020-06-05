@@ -2,17 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Archivist: Main Window</title>
+    <title>Project Archivist</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/tippy.js/dist/tippy.css"/>
+    <link rel="stylesheet" type="text/css" href="../node_modules/tippy.js/animations/shift-away.css"/>
     <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="style/standard.css"/>
-    <link rel="stylesheet" type="text/css" href="style/dark-theme.css"/>
     <link rel="stylesheet" type="text/css" href="style/index.css"/>
     <link rel="stylesheet" type="text/css" href="style/itemprop.css"/>
     <link rel="stylesheet" type="text/css" href="style/exclusionprop.css"/>
     <link rel="stylesheet" type="text/css" href="style/application.css"/>
-    <script>var exports = {"__esModule": true};</script>
+    <link rel="stylesheet" type="text/css" href="style/dark-theme.css"/>
+    <script type="text/javascript" src="script/classes.js"></script>
+    <script type="text/javascript" src="script/util.js"></script>
     <script type="text/javascript" src="script/application.js"></script>
   </head>
   <body>
@@ -176,21 +179,33 @@
     </page>
     <page id="Page_Excl">
       <section id="Section_AddExcl" class="flex-section">
-        <section id="Section_AddExcl_ExclSettings">
-          <control id="Control_ExclSettings_Exclusion">
-            <label for="Field_ExclSettings_ExclName" id="Label_ExclSettings_ExclName">Exclusion*</label>
-            <input type="text" id="Field_ExclSettings_ExclName" name="Field_ExclSettings_ExclName"/>
-          </control>
-          <control id="Control_ExclSettings_Recursive">
-            <label for="Checkbox_ExclSettings_Recursive" id="Label_ExclSettings_Recursive">Recursive exclusion?</label>
-            <input type="checkbox" id="Checkbox_ExclSettings_Recursive" name="Checkbox_ExclSettings_Recursive"/>
-          </control>
-        </section>
-        <section id="Section_AddExcl_ExitButtons">
-          <control id="Control_AddExcl_SaveExit"><input type="button" value="Save Item And Exit" id="Button_AddExcl_SaveExit"/></control>
-          <control id="Control_AddExcl_NoSaveExit"><input type="button" value="Exit Without Saving" id="Button_AddExcl_NoSaveExit"/></control>
-        </section>
+        <groupbox id="Group_ExclSettings">
+          <h1>Exclusion Settings</h1>
+          <section id="Section_AddExcl_ExclSettings">
+            <control id="Control_ExclSettings_Exclusion">
+              <label for="Field_ExclSettings_ExclName" id="Label_ExclSettings_ExclName">Exclusion*</label>
+              <input type="text" id="Field_ExclSettings_ExclName" name="Field_ExclSettings_ExclName"/>
+            </control>
+            <control id="Control_ExclSettings_Recursive">
+              <label for="Checkbox_ExclSettings_Recursive" id="Label_ExclSettings_Recursive">Recursive exclusion?</label>
+              <input type="checkbox" id="Checkbox_ExclSettings_Recursive" name="Checkbox_ExclSettings_Recursive"/>
+            </control>
+          </section>
+          <section id="Section_AddExcl_ExitButtons">
+            <control id="Control_AddExcl_SaveExit"><input type="button" value="Save Item And Exit" id="Button_AddExcl_SaveExit"/></control>
+            <control id="Control_AddExcl_NoSaveExit"><input type="button" value="Exit Without Saving" id="Button_AddExcl_NoSaveExit"/></control>
+          </section>
+        </groupbox>
       </section>
     </page>
+    <div id="Window_Error_Overlay" class="error-window-hidden"></div>
+    <div id="Window_Error" class="error-window error-window-hidden">
+      <h1>Error</h1>
+      <span>An error has occurred:</span>
+      <span id="Error_Desc"></span><br/><br/>
+      <span>Relevant information:</span><br/><br/>
+      <span id="Error_Additional"></span>
+      <control id="Control_Error_Acknowledge"><input type="button" value="Acknowledge" id="Button_Error_Acknowledge"/></control>
+    </div>
   </body>
 </html>

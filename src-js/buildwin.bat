@@ -1,0 +1,1 @@
+electron-packager ./ --platform=win32 --arch=x64 --asar --executable-name=parch --icon=src/media/icon.ico
