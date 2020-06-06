@@ -61,9 +61,9 @@ function writeScript(items, destination, callback = function(err) { if (err) thr
 
     for (let i = 0; i < item.exclusions.length; i++) {
       if (item.exclusionsRecursives[i])
-        out += PARAM_EXCLUDE_RECURSIVE + item.exclusions[i] + SPACE;
+        out += PARAM_EXCLUDE_RECURSIVE + QUOTE + item.exclusions[i] + QUOTE + SPACE;
       else
-        out += PARAM_EXCLUDE + item.exclusions[i] + SPACE;
+        out += PARAM_EXCLUDE + QUOTE + item.exclusions[i] + QUOTE + SPACE;
     }
 
     out += QUOTE + item.destinationPath + "\\" + item.fileName;
