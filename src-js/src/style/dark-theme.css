@@ -95,7 +95,7 @@ input:invalid, .invalid-item {
   background-color: rgb(20, 20, 20);
 }
 
-input:disabled {
+input:disabled, select:disabled {
   opacity: 0.5;
 }
 
