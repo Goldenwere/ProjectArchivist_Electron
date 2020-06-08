@@ -90,10 +90,24 @@ $(document).ready(function() {
   $("#Button_ListItems_Edit").prop("disabled", true);
   $("#Button_ListItems_Remove").prop("disabled", true);
 
+  handleMainFields();
   handleWindowButtons();
   handleItemEditorFields();
   handleTooltips();
 });
+
+function handleMainFields() {
+  // Compression level is 0 at very start of program
+  $("#Dropdown_GlobalControls_CompressionMethod").prop("disabled", true);
+
+  $("#Dropdown_GlobalControls_CompressionLevel").change(function() {
+    if (Number.parseInt($("#Dropdown_GlobalControls_CompressionLevel").val()) > 0)
+      $("#Dropdown_GlobalControls_CompressionMethod").prop("disabled", false);
+
+    else
+      $("#Dropdown_GlobalControls_CompressionMethod").prop("disabled", true);
+  });
+}
 
 /*
 ** Setup function - all buttons that in some way change page states in the window (add, edit, save/exit)
@@ -336,6 +350,14 @@ function handleItemEditorFields() {
   updateTextWithFileDialog($("#Field_FileSettings_SavePath"), false);
   updateTextWithTrimming($("#Field_ItemSettings_FileName"));
   updateTextWithTrimming($("#Field_ItemSettings_ItemName"));
+
+  $("#Dropdown_ItemSettings_CompressionLevel").change(function() {
+    if (Number.parseInt($("#Dropdown_ItemSettings_CompressionLevel").val()) > 0)
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", false);
+
+    else
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", true);
+  });
 }
 
 /*
@@ -458,6 +480,12 @@ function fillItemFields(isEdit = false) {
     $("#Dropdown_ItemSettings_CompressionLevel").val(items[workingIndexItem].compressionLevel);
     $("#Dropdown_ItemSettings_CompressionMethod").val(items[workingIndexItem].compressionMethod);
 
+    if (items[workingIndexItem].compressionLevel > 0)
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", false);
+
+    else
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", true);
+
     if (items[workingIndexItem].exclusions.length <= 0) {
       $("#Button_Exclusions_Edit").prop("disabled", true);
       $("#Button_Exclusions_Remove").prop("disabled", true);
@@ -486,6 +514,12 @@ function fillItemFields(isEdit = false) {
     $("#Dropdown_ItemSettings_CompressionMethod").val($("#Dropdown_GlobalControls_CompressionMethod").val());
     $("#Button_Exclusions_Edit").prop("disabled", true);
     $("#Button_Exclusions_Remove").prop("disabled", true);
+
+    if (Number.parseInt($("#Dropdown_GlobalControls_CompressionLevel").val()) > 0)
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", false);
+
+    else
+      $("#Dropdown_ItemSettings_CompressionMethod").prop("disabled", true);
   }
 
   $("#Field_ItemSettings_ItemName").get()[0].classList.remove("invalid-item");
