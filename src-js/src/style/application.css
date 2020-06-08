@@ -9,11 +9,11 @@ page {
   left: 0;
   width: 100vw;
   height: 100vh;
-  transform: translateX(100%);
+  transform: translateY(-15%) scaleY(0.95);
   opacity: 0;
   visibility: hidden;
   transition-property: transform, opacity;
-  transition-timing-function: cubic-bezier(0,1,1,1);
+  transition-timing-function: cubic-bezier(0,.5,.5,1);
   transition-duration: 0.5s;
 }
 
@@ -24,7 +24,7 @@ page {
   left: 0;
   width: 100vw;
   height: 100vh;
-  transform: translateX(0);
+  transform: translateX(0) scaleY(1);
   opacity: 100%;
 }
 
