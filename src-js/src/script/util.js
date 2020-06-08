@@ -41,17 +41,19 @@ function writeScript(items, destination, callback = function(err) { if (err) thr
     else
       out += PARAM_TYPE + EXTENSION_ZIP + SPACE;
 
-    switch (item.compressionMethod)
-    {
-      case CompressionMethod.bzip2:
-        out += TYPE_BZIP2 + SPACE;
-      case CompressionMethod.ppmd:
-        out += TYPE_PPMD + SPACE;
-      case CompressionMethod.lzma2:
-        out += TYPE_LZMA2 + SPACE;
-      case CompressionMethod.lzma:
-      default:
-        out += TYPE_LZMA + SPACE;
+    if (item.compressionLevel > 0) {
+      switch (item.compressionMethod)
+      {
+        case CompressionMethod.bzip2:
+          out += TYPE_BZIP2 + SPACE;
+        case CompressionMethod.ppmd:
+          out += TYPE_PPMD + SPACE;
+        case CompressionMethod.lzma2:
+          out += TYPE_LZMA2 + SPACE;
+        case CompressionMethod.lzma:
+        default:
+          out += TYPE_LZMA + SPACE;
+      }
     }
 
     out += PARAM_LEVEL + item.compressionLevel.toString() + SPACE;
