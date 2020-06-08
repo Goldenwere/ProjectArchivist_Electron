@@ -461,6 +461,7 @@ function fillItemFields(isEdit = false) {
         $("#List_Exclusions_Items").append(elem);
         handleListsChildren(elem, true);
       });
+      $("#List_Exclusions_Items").children()[0].classList.add("selected");
     }
   }
 
