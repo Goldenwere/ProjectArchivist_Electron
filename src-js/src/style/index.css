@@ -1,3 +1,8 @@
+#Page_Main {
+  display: grid;
+  grid-template-rows: 8rem auto 6rem;
+}
+
 #Control_ListItems_ArchivedItems {
   width: 50%;
 }
@@ -74,11 +79,6 @@
 
 #Control_GlobalControls_Destination label, #Control_FileSettings_SavePath label {
   flex: 1 1 10rem;
-}
-
-#Section_Functions {
-  position: fixed;
-  bottom: 0;
 }
 
 #Section_Functions * {
