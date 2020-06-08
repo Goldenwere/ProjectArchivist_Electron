@@ -246,6 +246,11 @@ function handleWindowButtons() {
   $("#Button_AddItem_NoSaveExit").click(function() {
     switchToFromItemPage();
     PageSounds.UI_Click.play();
+    let listChildren = $("#List_ListItems_ArchivedItems").children();
+    for (let i = 0; i < listChildren.length; i++) {
+      if (listChildren[i].classList.contains("selected"))
+        workingIndexItem = i;
+    }
   });
 
   $("#Button_AddExcl_SaveExit").click(function() {
@@ -282,6 +287,11 @@ function handleWindowButtons() {
   $("#Button_AddExcl_NoSaveExit").click(function() {
     switchToFromExclPage();
     PageSounds.UI_Click.play();
+    let listChildren = $("#List_Exclusions_Items").children();
+    for (let i = 0; i < listChildren.length; i++) {
+      if (listChildren[i].classList.contains("selected"))
+        workingIndexExcl = i;
+    }
   });
 
   $("#Button_GlobalControls_ApplyGlobals").click(function() {
