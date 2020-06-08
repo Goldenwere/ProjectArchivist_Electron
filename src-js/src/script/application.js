@@ -487,6 +487,11 @@ function fillItemFields(isEdit = false) {
     $("#Button_Exclusions_Edit").prop("disabled", true);
     $("#Button_Exclusions_Remove").prop("disabled", true);
   }
+
+  $("#Field_ItemSettings_ItemName").get()[0].classList.remove("invalid-item");
+  $("#Field_ItemSettings_Source").get()[0].classList.remove("invalid-item");
+  $("#Field_ItemSettings_Destination").get()[0].classList.remove("invalid-item");
+  $("#Field_ItemSettings_FileName").get()[0].classList.remove("invalid-item");
 }
 
 /*
@@ -502,6 +507,8 @@ function fillExclusionFields(isEdit = false) {
     $("#Field_ExclSettings_ExclName").val("");
     $("#Checkbox_ExclSettings_Recursive").prop("checked", false);
   }
+
+  $("#Field_ExclSettings_ExclName").get()[0].classList.remove("invalid-item");
 }
 
 /*
