@@ -4,8 +4,8 @@ const path = require('path');
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
     backgroundColor: "#141414",
-    width: 800,
-    height: 600,
+    minWidth: 800,
+    minHeight: 720,
     icon: __dirname + '/../media/icon.png',
     webPreferences: {
       webSecurity: true,

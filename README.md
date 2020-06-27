@@ -12,16 +12,17 @@ Project Archivist stems from the code written for a [Windows Form application of
 
 ### Up next for 1.1.0
 
-- XML file creation
-- Automatic script execution within program
+- Script interpreter (load script for editing)
+- Open shell from app
+  - Ensure 7-Zip installed using [command-exists](https://github.com/raftario/command-exists)
+  - Automatic script execution within program using [child_process](https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app)
+- (TBD) End-of-script summary
 
 ### Up next for 1.2.0
 
 - Themes
 
-### Needs researching
+### Needs Researching
 
-- Ensure 7-Zip is installed
-- Ensure 7-Zip can be executed
 - Linux implementation
 - Mac implementation (will need Mac tester)
