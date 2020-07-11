@@ -17,10 +17,12 @@ Project Archivist stems from the code written for a [Windows Form application of
   - Ensure 7-Zip installed using [command-exists](https://github.com/raftario/command-exists)
   - Automatic script execution within program using [child_process](https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app)
 - (TBD) End-of-script summary
+- (TBD) Autocomplete (interpret name/file name from source)
 
 ### Up next for 1.2.0
 
 - Themes
+- (TBD) UI Navigation (arrow keys)
 
 ### Needs Researching
 
