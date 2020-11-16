@@ -10,21 +10,23 @@ Project Archivist stems from the code written for a [Windows Form application of
 
 ## Roadmap
 
-### Up next for 1.1.0
+### ~~Up next for 1.1.0~~
 
-- Script interpreter (load script for editing)
-- Open shell from app
-  - Ensure 7-Zip installed using [command-exists](https://github.com/raftario/command-exists)
-  - Automatic script execution within program using [child_process](https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app)
-- (TBD) End-of-script summary
-- (TBD) Autocomplete (interpret name/file name from source)
+- ~~Script interpreter (load script for editing)~~
+- ~~Open shell from app~~
+  - ~~Ensure 7-Zip installed using [command-exists](https://github.com/raftario/command-exists)~~
+  - ~~Automatic script execution within program using [child_process](https://stackoverflow.com/questions/35079548/how-to-call-shell-script-or-python-script-in-from-a-atom-electron-app)~~
+- ~~(TBD) End-of-script summary~~
+- ~~(TBD) Autocomplete (interpret name/file name from source)~~
 
-### Up next for 1.2.0
+### ~~Up next for 1.2.0~~
 
-- Themes
-- (TBD) UI Navigation (arrow keys)
+- ~~Themes~~
+- ~~(TBD) UI Navigation (arrow keys)~~
 
-### Needs Researching
+### ~~Needs Researching~~
 
-- Linux implementation
-- Mac implementation (will need Mac tester)
+- ~~Linux implementation~~
+- ~~Mac implementation (will need Mac tester)~~
+
+This version of Project Archivist has been archived in favor of a future TBA version built using [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate). 1.0 will feature 7z integration and the use of in-app-executable configurations rather than scripts
